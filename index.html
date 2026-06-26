@@ -1,169 +1,153 @@
 <!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
+<html lang="pt-BR"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- ===== EDITE AQUI: título da aba ===== -->
 <title>Indicadores de Saúde dos Bancos Brasileiros</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#1a1f2b; --muted:#6b7280; --faint:#9aa0a8;
-    --paper:#fbfaf8; --line:#e6e2da; --authority:#1f3a5f;
-    --risk:#b91c1c; --safe:#2f6b3c; --amber:#9a6a10;
-    --serif:"Source Serif 4",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
-       line-height:1.65;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
-  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--authority);
-           font-weight:600;margin:0 0 14px}
-  header.masthead{padding:56px 0 30px;border-bottom:2px solid var(--ink)}
-  h1{font-family:var(--serif);font-weight:700;font-size:40px;line-height:1.12;margin:0 0 12px;
-     letter-spacing:-.01em}
-  .subtitle{font-family:var(--serif);font-size:19px;color:var(--muted);margin:0 0 22px;font-weight:400}
-  .byline{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--muted);
-          padding-top:18px;border-top:1px solid var(--line)}
-  .byline strong{color:var(--ink);font-weight:600}
-  section{padding:38px 0;border-bottom:1px solid var(--line)}
-  h2{font-family:var(--serif);font-size:24px;font-weight:600;margin:0 0 8px;letter-spacing:-.01em}
-  .lede{font-size:17px;color:var(--ink);margin:0 0 24px}
-  p{margin:0 0 16px}
-  .figure{margin:8px 0 4px}
-  .figure svg{width:100%;height:auto;display:block}
-  .cap{font-size:13px;color:var(--faint);margin:6px 2px 0}
-  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;
-           border:none;padding:30px 0}
-  .metric{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
-  .metric .v{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1}
-  .metric .l{font-size:13px;color:var(--muted);margin-top:6px}
-  .guide{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;font-size:14.5px}
-  .guide div{display:flex;gap:9px;align-items:flex-start}
-  .dot{width:11px;height:11px;border-radius:3px;margin-top:5px;flex:none}
-  .analysis p strong{font-weight:600}
-  .name-risk{color:var(--risk);font-weight:600}
-  .name-amber{color:var(--amber);font-weight:600}
-  .method{font-size:14.5px;color:var(--muted)}
-  .method strong{color:var(--ink);font-weight:600}
-  footer{padding:30px 0 60px;font-size:13px;color:var(--faint)}
-  footer a{color:var(--muted)}
-  @media(max-width:560px){h1{font-size:31px}.guide{grid-template-columns:1fr}}
-</style>
-</head>
-<body>
+:root{--ink:#1a1f2b;--muted:#6b7280;--faint:#9aa0a8;--paper:#fbfaf8;--line:#e6e2da;--authority:#1f3a5f;--risk:#b91c1c;--safe:#2f6b3c;--serif:"Source Serif 4",Georgia,serif;--sans:"Inter",system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 24px}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--authority);font-weight:600;margin:0 0 14px}
+header.masthead{padding:56px 0 30px;border-bottom:2px solid var(--ink)}
+h1{font-family:var(--serif);font-weight:700;font-size:40px;line-height:1.12;margin:0 0 12px;letter-spacing:-.01em}
+.subtitle{font-family:var(--serif);font-size:19px;color:var(--muted);margin:0 0 22px;font-weight:400}
+.byline{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--muted);padding-top:18px;border-top:1px solid var(--line)}
+.byline strong{color:var(--ink);font-weight:600}
+section{padding:38px 0;border-bottom:1px solid var(--line)}
+h2{font-family:var(--serif);font-size:24px;font-weight:600;margin:0 0 8px;letter-spacing:-.01em}
+.lede{font-size:17px;margin:0 0 24px}
+p{margin:0 0 16px}
+.figure svg{width:100%;height:auto;display:block}
+.cap{font-size:13px;color:var(--faint);margin:6px 2px 0}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;border:none;padding:30px 0}
+.metric{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.metric .v{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1}
+.metric .l{font-size:13px;color:var(--muted);margin-top:6px}
+.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:14px 0 0}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.ln{width:22px;height:0;border-top:2.5px solid}
+table.tend{width:100%;border-collapse:collapse;font-size:14px}
+table.tend td{padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tend .bk{font-weight:500}.tend .sp{width:90px}.tend .vl{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.tend .dr{text-align:right;font-weight:500;white-space:nowrap;width:96px}
+.name-risk{color:var(--risk);font-weight:600}.name-safe{color:var(--safe);font-weight:600}.name-amber{color:#9a6a10;font-weight:600}
+.method{font-size:14.5px;color:var(--muted)}.method strong{color:var(--ink);font-weight:600}
+.cta{background:#f4f1ea;border:none}.cta h2{color:var(--authority);margin-bottom:10px}
+.cta-sub{color:var(--muted);max-width:560px;margin:0 auto 18px;font-size:15.5px}
+.cta-sub strong{color:var(--ink)}
+.cta-mail{font-size:16px;margin:0}
+.cta-mail a{display:inline-block;margin-top:8px;background:var(--authority);color:#fff;text-decoration:none;font-weight:600;padding:11px 22px;border-radius:8px}
+.cta-mail a:hover{background:#16304e}
+footer{padding:30px 0 60px;font-size:13px;color:var(--faint)}
+@media(max-width:560px){h1{font-size:31px}}
+</style></head><body>
 
-<header class="masthead">
-  <div class="wrap">
-    <p class="eyebrow">Dados oficiais do Banco Central · Fevereiro 2026</p>
-    <!-- ===== EDITE AQUI: título e subtítulo ===== -->
-    <h1>Indicadores de Saúde dos Bancos Brasileiros</h1>
-    <p class="subtitle">Risco e desempenho das instituições financeiras, lidos a partir dos balancetes oficiais do Banco Central.</p>
-    <div class="byline">
-      <!-- ===== EDITE AQUI: troque [NOME] pelo nome do seu pai (e CRC, se quiser) ===== -->
-      <span>Análise por <strong>[NOME]</strong></span>
-      <span>Atualização mensal</span>
-    </div>
-  </div>
-</header>
+<header class="masthead"><div class="wrap">
+<p class="eyebrow">Dados oficiais do Banco Central · Fevereiro 2026</p>
+<!-- EDITE AQUI: título e subtítulo -->
+<h1>Indicadores de Saúde dos Bancos Brasileiros</h1>
+<p class="subtitle">Risco e desempenho das instituições financeiras, lidos a partir dos balancetes oficiais do Banco Central.</p>
+<div class="byline"><!-- EDITE AQUI: [NOME] --><span>Análise por <strong>[NOME]</strong></span><span>Atualização mensal</span></div>
+</div></header>
 
 <main>
-  <section>
-    <div class="wrap">
-      <p class="lede">Os balancetes que todo banco entrega ao Banco Central dizem muito sobre a sua saúde — desde que lidos contra os pares. Abaixo, o segmento de bancos digitais posicionado por duas dimensões: quanto capital cada instituição tem para se proteger, e quanta inadimplência carrega.</p>
+<section><div class="wrap">
+<p class="lede">Onde cada banco digital está hoje: quanto capital tem para se proteger (horizontal) e quanta inadimplência carrega (vertical). Mas a posição é só metade da história — a outra metade é a direção.</p>
+<div class="figure"><svg viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa de risco dos bancos digitais em fevereiro de 2026.">
+<rect x="70" y="40" width="159.6" height="219.1" fill="#fbeaea"/>
+<rect x="229.6" y="259.1" width="410.4" height="90.9" fill="#eaf2ec"/>
+<line x1="70" y1="350" x2="655" y2="350" stroke="#6b7280"/><line x1="70" y1="40" x2="70" y2="350" stroke="#6b7280"/>
+<line x1="229.6" y1="40" x2="229.6" y2="350" stroke="#c9c5bc" stroke-dasharray="4 4"/>
+<line x1="70" y1="259.1" x2="655" y2="259.1" stroke="#c9c5bc" stroke-dasharray="4 4"/>
+<text x="80" y="59" font-size="12.5" fill="#b91c1c" font-family="Inter,sans-serif" font-weight="600">atenção</text>
+<text x="648" y="343" font-size="12.5" fill="#2f6b3c" font-family="Inter,sans-serif" font-weight="600" text-anchor="end">saudável</text>
+<text x="0" y="0" font-size="12.5" fill="#6b7280" font-family="Inter,sans-serif" transform="translate(26,195) rotate(-90)" text-anchor="middle">inadimplência  →  mais risco</text>
+<text x="362" y="410" font-size="12.5" fill="#6b7280" font-family="Inter,sans-serif" text-anchor="middle">capitalização  →  mais segurança</text>
+<circle cx="247.8" cy="238.4" r="5" fill="#9aa0a8"/><text x="256.8" y="229.4" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="start">Inter</text>
+<circle cx="599.0" cy="149.5" r="5" fill="#9aa0a8"/><text x="590.0" y="140.5" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="end">BV</text>
+<circle cx="206.8" cy="68.9" r="8" fill="#c0392b"/><text x="215.8" y="59.9" font-size="11.5" fill="#b91c1c" font-family="Inter,sans-serif" font-weight="600" text-anchor="start">PicPay</text>
+<circle cx="90.5" cy="296.3" r="5" fill="#9aa0a8"/><text x="81.5" y="287.3" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="end">Digio</text>
+<circle cx="120.2" cy="300.4" r="5" fill="#9aa0a8"/><text x="129.2" y="291.4" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="start">C6</text>
+<circle cx="190.8" cy="335.5" r="5" fill="#9aa0a8"/><text x="199.8" y="326.5" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="start">XP</text>
+<circle cx="323.1" cy="85.5" r="6" fill="#ba7517"/><text x="332.1" y="76.5" font-size="11.5" fill="#9a6a10" font-family="Inter,sans-serif" font-weight="600" text-anchor="start">PAN</text>
+<circle cx="245.6" cy="271.5" r="5" fill="#9aa0a8"/><text x="254.6" y="262.5" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="start">BMG</text>
+<circle cx="348.2" cy="267.3" r="5" fill="#9aa0a8"/><text x="357.2" y="258.3" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="start">BS2</text>
+<circle cx="227.3" cy="252.9" r="7" fill="#2f6b3c"/><text x="218.3" y="243.9" font-size="11.5" fill="#2f6b3c" font-family="Inter,sans-serif" font-weight="600" text-anchor="end">Original</text>
+</svg></div>
+<p class="cap">Segmento digital, fevereiro/2026. Linhas tracejadas: medianas. Dois bancos do segmento ainda não reportam a carteira por estágios e ficam fora do mapa.</p>
+</div></section>
 
-      <div class="figure">
-        <svg viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa de risco dos bancos digitais por capitalização e inadimplência. O PicPay aparece isolado na zona de atenção, com inadimplência cerca de 3,5 vezes a mediana do segmento e capital abaixo da média.">
-          <rect x="70" y="40" width="159.6" height="229.3" fill="#fbeaea"/>
-          <rect x="229.6" y="269.3" width="420.4" height="80.7" fill="#eaf2ec"/>
-          <line x1="70" y1="350" x2="655" y2="350" stroke="#6b7280" stroke-width="1"/>
-          <line x1="70" y1="40" x2="70" y2="350" stroke="#6b7280" stroke-width="1"/>
-          <line x1="229.6" y1="40" x2="229.6" y2="350" stroke="#c9c5bc" stroke-width="1" stroke-dasharray="4 4"/>
-          <line x1="70" y1="269.3" x2="655" y2="269.3" stroke="#c9c5bc" stroke-width="1" stroke-dasharray="4 4"/>
-          <text x="234" y="55" font-size="11" fill="#9aa0a8" font-family="Inter,sans-serif">mediana de capital</text>
-          <text x="648" y="264" font-size="11" text-anchor="end" fill="#9aa0a8" font-family="Inter,sans-serif">mediana de inadimplência</text>
-          <text x="80" y="59" font-size="12.5" fill="#b91c1c" font-family="Inter,sans-serif" font-weight="600">atenção</text>
-          <text x="648" y="343" font-size="12.5" text-anchor="end" fill="#2f6b3c" font-family="Inter,sans-serif" font-weight="600">saudável</text>
-          <text x="0" y="0" font-size="12.5" fill="#6b7280" font-family="Inter,sans-serif" transform="translate(26,195) rotate(-90)" text-anchor="middle">inadimplência  →  mais risco</text>
-          <text x="362" y="410" font-size="12.5" fill="#6b7280" font-family="Inter,sans-serif" text-anchor="middle">capitalização  →  mais segurança</text>
-          <circle cx="90.5" cy="296.3" r="5" fill="#9aa0a8"/><text x="98" y="293" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">Digio</text>
-          <circle cx="120.2" cy="300.4" r="5" fill="#9aa0a8"/><text x="128" y="304" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">C6</text>
-          <circle cx="190.8" cy="335.5" r="5" fill="#9aa0a8"/><text x="198" y="339" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">XP</text>
-          <circle cx="206.8" cy="350" r="5" fill="#9aa0a8"/><text x="200" y="343" font-size="11" fill="#6b7280" font-family="Inter,sans-serif" text-anchor="end">VR</text>
-          <circle cx="231.9" cy="350" r="5" fill="#9aa0a8"/><text x="240" y="347" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">Digimais</text>
-          <circle cx="245.6" cy="271.5" r="5" fill="#9aa0a8"/><text x="253" y="275" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">BMG</text>
-          <circle cx="227.3" cy="252.9" r="5" fill="#9aa0a8"/><text x="221" y="250" font-size="11" fill="#6b7280" font-family="Inter,sans-serif" text-anchor="end">Original</text>
-          <circle cx="247.8" cy="238.4" r="5" fill="#9aa0a8"/><text x="255" y="236" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">Inter</text>
-          <circle cx="348.2" cy="267.3" r="5" fill="#9aa0a8"/><text x="356" y="270" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">BS2</text>
-          <circle cx="599" cy="149.5" r="5" fill="#9aa0a8"/><text x="591" y="146" font-size="11" fill="#6b7280" font-family="Inter,sans-serif" text-anchor="end">BV</text>
-          <circle cx="323.1" cy="85.5" r="6" fill="#ba7517"/><text x="331" y="82" font-size="12.5" fill="#9a6a10" font-family="Inter,sans-serif" font-weight="600">PAN</text>
-          <text x="331" y="96" font-size="10" fill="#9aa0a8" font-family="Inter,sans-serif">inadimplência alta, capital alto</text>
-          <circle cx="206.8" cy="68.9" r="8" fill="#c0392b"/><text x="218" y="66" font-size="13.5" fill="#b91c1c" font-family="Inter,sans-serif" font-weight="600">PicPay</text>
-          <text x="218" y="80" font-size="10" fill="#9aa0a8" font-family="Inter,sans-serif">inadimplência ~3,5× a mediana</text>
-        </svg>
-      </div>
-      <p class="cap">Cada ponto é um banco do segmento digital. Posição horizontal: capitalização. Posição vertical: inadimplência. Linhas tracejadas: medianas do segmento.</p>
-    </div>
-  </section>
+<div class="wrap"><div class="metrics">
+<div class="metric"><div class="v">10</div><div class="l">bancos com dados completos</div></div>
+<div class="metric"><div class="v">7%</div><div class="l">capitalização mediana</div></div>
+<div class="metric"><div class="v">4,4%</div><div class="l">inadimplência mediana</div></div>
+<div class="metric"><div class="v">fev/26</div><div class="l">mês de referência</div></div>
+</div></div>
 
-  <div class="wrap">
-    <div class="metrics">
-      <div class="metric"><div class="v">12</div><div class="l">bancos no segmento digital</div></div>
-      <div class="metric"><div class="v">7%</div><div class="l">capitalização mediana</div></div>
-      <div class="metric"><div class="v">3,9%</div><div class="l">inadimplência mediana</div></div>
-      <div class="metric"><div class="v">fev/26</div><div class="l">mês de referência</div></div>
-    </div>
-  </div>
+<section><div class="wrap">
+<h2>A direção importa tanto quanto a posição</h2>
+<p>Dois bancos podem estar no mesmo ponto do mapa e contar histórias opostas. Veja a inadimplência ao longo dos últimos meses: o <span class="name-risk">PicPay</span> vem <strong>subindo</strong> desde que passou a reportar a carteira por estágios; o <span class="name-safe">Original</span>, que já esteve perto de 15%, vem <strong>caindo</strong> de forma consistente. Mesma vizinhança, rumos contrários.</p>
+<div class="figure"><svg viewBox="0 0 680 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trajetória da inadimplência: PicPay subindo, Original caindo.">
+<text x="52" y="304.0" font-size="10" fill="#9aa0a8" text-anchor="end" font-family="Inter,sans-serif">0%</text><line x1="60" y1="300.0" x2="650" y2="300.0" stroke="#eee8df" stroke-width="1"/><text x="52" y="236.5" font-size="10" fill="#9aa0a8" text-anchor="end" font-family="Inter,sans-serif">4%</text><line x1="60" y1="232.5" x2="650" y2="232.5" stroke="#eee8df" stroke-width="1"/><text x="52" y="169.0" font-size="10" fill="#9aa0a8" text-anchor="end" font-family="Inter,sans-serif">8%</text><line x1="60" y1="165.0" x2="650" y2="165.0" stroke="#eee8df" stroke-width="1"/><text x="52" y="101.5" font-size="10" fill="#9aa0a8" text-anchor="end" font-family="Inter,sans-serif">12%</text><line x1="60" y1="97.5" x2="650" y2="97.5" stroke="#eee8df" stroke-width="1"/><text x="52" y="34.0" font-size="10" fill="#9aa0a8" text-anchor="end" font-family="Inter,sans-serif">16%</text><line x1="60" y1="30.0" x2="650" y2="30.0" stroke="#eee8df" stroke-width="1"/>
+<line x1="60" y1="30" x2="60" y2="300" stroke="#6b7280"/><line x1="60" y1="300" x2="650" y2="300" stroke="#6b7280"/>
+<text x="60.0" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">jan/25</text><text x="150.8" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">mar</text><text x="241.5" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">mai</text><text x="332.3" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">jul</text><text x="423.1" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">set</text><text x="513.8" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">nov</text><text x="604.6" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">jan/26</text>
+<polyline points="60.0,40.1 105.4,51.9 150.8,68.8 196.2,60.4 241.5,72.2 286.9,97.5 332.3,72.2 377.7,100.9 423.1,148.1 468.5,124.5 513.8,144.8 559.2,180.2 604.6,203.8 650.0,220.7" fill="none" stroke="#2f6b3c" stroke-width="2.5"/>
+<circle cx="60.0" cy="40.1" r="3" fill="#2f6b3c"/>
+<circle cx="105.4" cy="51.9" r="3" fill="#2f6b3c"/>
+<circle cx="150.8" cy="68.8" r="3" fill="#2f6b3c"/>
+<circle cx="196.2" cy="60.4" r="3" fill="#2f6b3c"/>
+<circle cx="241.5" cy="72.2" r="3" fill="#2f6b3c"/>
+<circle cx="286.9" cy="97.5" r="3" fill="#2f6b3c"/>
+<circle cx="332.3" cy="72.2" r="3" fill="#2f6b3c"/>
+<circle cx="377.7" cy="100.9" r="3" fill="#2f6b3c"/>
+<circle cx="423.1" cy="148.1" r="3" fill="#2f6b3c"/>
+<circle cx="468.5" cy="124.5" r="3" fill="#2f6b3c"/>
+<circle cx="513.8" cy="144.8" r="3" fill="#2f6b3c"/>
+<circle cx="559.2" cy="180.2" r="3" fill="#2f6b3c"/>
+<circle cx="604.6" cy="203.8" r="3" fill="#2f6b3c"/>
+<circle cx="650.0" cy="220.7" r="3" fill="#2f6b3c"/>
+<circle cx="60.0" cy="242.6" r="3" fill="#c0392b"/>
+<polyline points="468.5,141.4 513.8,112.7 559.2,68.8 604.6,73.9 650.0,70.5" fill="none" stroke="#c0392b" stroke-width="2.5"/>
+<circle cx="468.5" cy="141.4" r="3" fill="#c0392b"/>
+<circle cx="513.8" cy="112.7" r="3" fill="#c0392b"/>
+<circle cx="559.2" cy="68.8" r="3" fill="#c0392b"/>
+<circle cx="604.6" cy="73.9" r="3" fill="#c0392b"/>
+<circle cx="650.0" cy="70.5" r="3" fill="#c0392b"/>
+<text x="655" y="68.5" font-size="12" fill="#b91c1c" font-family="Inter,sans-serif" font-weight="600" text-anchor="end">PicPay ↑</text>
+<text x="120" y="34.1" font-size="12" fill="#2f6b3c" font-family="Inter,sans-serif" font-weight="600">Original ↓</text>
+</svg></div>
+<p class="cap">Inadimplência (% da carteira) por mês. O PicPay não reportava estágios antes de out/2025 — por isso a linha começa ali, sem inventar valores.</p>
+</div></section>
 
-  <section>
-    <div class="wrap">
-      <h2>Como ler o mapa</h2>
-      <div class="guide">
-        <div><span class="dot" style="background:#9aa0a8"></span><span>Quanto mais à <strong>direita</strong>, mais capital o banco tem — mais protegido.</span></div>
-        <div><span class="dot" style="background:#9aa0a8"></span><span>Quanto mais para <strong>cima</strong>, maior a inadimplência — mais risco.</span></div>
-        <div><span class="dot" style="background:#f0c0c0"></span><span>Canto superior esquerdo: <strong style="color:var(--risk)">atenção</strong> — pouco capital e muita inadimplência.</span></div>
-        <div><span class="dot" style="background:#bcd8c2"></span><span>Canto inferior direito: <strong style="color:var(--safe)">saudável</strong> — bem capitalizado e inadimplência baixa.</span></div>
-      </div>
-    </div>
-  </section>
+<section><div class="wrap">
+<h2>Para onde cada banco caminha</h2>
+<p>O momentum do segmento de relance: a mini-linha mostra a trajetória da inadimplência de cada banco, e a coluna à direita resume a direção.</p>
+<table class="tend"><tbody>
+<tr><td class="bk">Inter</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,10.0 8.2,7.3 14.3,6.5 20.5,11.7 26.6,11.7 32.8,13.4 38.9,12.6 45.1,12.6 51.2,13.4 57.4,23.0 63.5,10.0 69.7,8.2 75.8,5.6 82.0,3.0" fill="none" stroke="#c0392b" stroke-width="1.6"/><circle cx="82.0" cy="3.0" r="2.2" fill="#c0392b"/></svg></td><td class="vl">5.4%</td><td class="dr" style="color:#b91c1c">↑ subindo</td></tr><tr><td class="bk">BV</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,19.2 8.2,23.0 14.3,23.0 20.5,17.0 26.6,17.0 32.8,16.6 38.9,15.8 45.1,16.2 51.2,13.2 57.4,11.9 63.5,10.7 69.7,9.8 75.8,7.7 82.0,3.0" fill="none" stroke="#c0392b" stroke-width="1.6"/><circle cx="82.0" cy="3.0" r="2.2" fill="#c0392b"/></svg></td><td class="vl">9.7%</td><td class="dr" style="color:#b91c1c">↑ subindo</td></tr><tr><td class="bk">PicPay</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="57.4,11.3 63.5,8.0 69.7,3.0 75.8,3.6 82.0,3.2" fill="none" stroke="#c0392b" stroke-width="1.6"/><circle cx="82.0" cy="3.2" r="2.2" fill="#c0392b"/></svg></td><td class="vl">13.6%</td><td class="dr" style="color:#b91c1c">↑ subindo</td></tr><tr><td class="bk">Digio</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,3.0 8.2,3.3 14.3,17.9 20.5,16.4 26.6,17.6 32.8,19.0 38.9,20.4 45.1,20.4 51.2,20.1 57.4,21.6 63.5,21.9 69.7,21.9 75.8,23.0 82.0,23.0" fill="none" stroke="#2f6b3c" stroke-width="1.6"/><circle cx="82.0" cy="23.0" r="2.2" fill="#2f6b3c"/></svg></td><td class="vl">2.6%</td><td class="dr" style="color:#2f6b3c">↓ caindo</td></tr><tr><td class="bk">C6</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,11.3 8.2,9.7 14.3,8.0 20.5,6.3 26.6,6.3 32.8,3.0 38.9,8.0 45.1,9.7 51.2,11.3 57.4,19.7 63.5,18.0 69.7,23.0 75.8,23.0 82.0,21.3" fill="none" stroke="#9aa0a8" stroke-width="1.6"/><circle cx="82.0" cy="21.3" r="2.2" fill="#9aa0a8"/></svg></td><td class="vl">2.4%</td><td class="dr" style="color:#9aa0a8">→ estável</td></tr><tr><td class="bk">XP</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,23.0 8.2,19.0 14.3,11.0 20.5,3.0 26.6,11.0 32.8,15.0 38.9,11.0 45.1,11.0 51.2,11.0 57.4,3.0 63.5,3.0 69.7,3.0 75.8,7.0 82.0,11.0" fill="none" stroke="#9aa0a8" stroke-width="1.6"/><circle cx="82.0" cy="11.0" r="2.2" fill="#9aa0a8"/></svg></td><td class="vl">0.7%</td><td class="dr" style="color:#9aa0a8">→ estável</td></tr><tr><td class="bk">PAN</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,23.0 8.2,20.2 14.3,15.8 20.5,12.4 26.6,7.4 32.8,8.6 38.9,3.0 45.1,3.0 51.2,6.3 57.4,6.9 63.5,4.1 69.7,8.0 75.8,6.3 82.0,7.4" fill="none" stroke="#2f6b3c" stroke-width="1.6"/><circle cx="82.0" cy="7.4" r="2.2" fill="#2f6b3c"/></svg></td><td class="vl">12.8%</td><td class="dr" style="color:#2f6b3c">↓ caindo</td></tr><tr><td class="bk">BMG</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,23.0 8.2,20.8 14.3,20.8 20.5,11.9 26.6,7.4 32.8,7.4 38.9,9.7 45.1,3.0 51.2,5.2 57.4,7.4 63.5,7.4 69.7,11.9 75.8,7.4 82.0,3.0" fill="none" stroke="#9aa0a8" stroke-width="1.6"/><circle cx="82.0" cy="3.0" r="2.2" fill="#9aa0a8"/></svg></td><td class="vl">3.8%</td><td class="dr" style="color:#9aa0a8">→ estável</td></tr><tr><td class="bk">BS2</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,23.0 8.2,23.0 14.3,22.1 20.5,19.4 26.6,15.7 32.8,14.8 38.9,13.9 45.1,6.6 51.2,8.5 57.4,5.7 63.5,3.0 69.7,9.4 75.8,5.7 82.0,3.9" fill="none" stroke="#9aa0a8" stroke-width="1.6"/><circle cx="82.0" cy="3.9" r="2.2" fill="#9aa0a8"/></svg></td><td class="vl">4.0%</td><td class="dr" style="color:#9aa0a8">→ estável</td></tr><tr><td class="bk">Original</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,3.0 8.2,4.3 14.3,6.2 20.5,5.2 26.6,6.6 32.8,9.4 38.9,6.6 45.1,9.7 51.2,15.0 57.4,12.3 63.5,14.6 69.7,18.5 75.8,21.1 82.0,23.0" fill="none" stroke="#2f6b3c" stroke-width="1.6"/><circle cx="82.0" cy="23.0" r="2.2" fill="#2f6b3c"/></svg></td><td class="vl">4.7%</td><td class="dr" style="color:#2f6b3c">↓ caindo</td></tr>
+</tbody></table>
+</div></section>
 
-  <section class="analysis">
-    <div class="wrap">
-      <h2>A leitura do mês</h2>
-      <p>Um nome se destaca pelo risco: o <span class="name-risk">PicPay</span>. Sua inadimplência está em torno de <strong>três vezes e meia a mediana</strong> dos bancos digitais, enquanto seu capital fica abaixo da média do grupo. É a combinação que pede atenção — mais perda de crédito que os concorrentes, com menos colchão para absorvê-la. Sozinho, o número "6% de capital" não diria nada; é a posição contra os pares que conta a história.</p>
-      <p>O contraste com o <span class="name-amber">Banco PAN</span> é instrutivo. O PAN convive com inadimplência parecida, mas mantém capitalização bem acima da média: o mesmo nível de inadimplência significa risco diferente, porque a almofada de capital é maior. Dois bancos com o mesmo número, e situações opostas — algo que só a leitura comparada revela.</p>
-      <p>No extremo oposto, o <strong>BV</strong> aparece como o mais capitalizado do segmento, e nomes como <strong>Digimais</strong> e <strong>BMG</strong> ocupam a zona saudável: capital sólido e inadimplência baixa.</p>
-    </div>
-  </section>
+<section><div class="wrap">
+<h2>A leitura do mês</h2>
+<p>O <span class="name-risk">PicPay</span> concentra os sinais de atenção: inadimplência acima de três vezes a mediana do segmento <strong>e em alta</strong>, com capital abaixo da média. Já o <span class="name-amber">PAN</span> convive com inadimplência igualmente alta, mas bem capitalizado — mesmo número, risco diferente. E o <span class="name-safe">Original</span> mostra que trajetória conta: ainda perto da linha de atenção, mas vindo de uma queda forte — um banco em recuperação, não em deterioração.</p>
+</div></section>
 
-  <section>
-    <div class="wrap">
-      <h2>Fonte e método</h2>
-      <p class="method">Construído sobre os <strong>balancetes mensais oficiais do Banco Central do Brasil</strong>, já no novo padrão contábil brasileiro (<strong>Resolução CMN 4.966/2021</strong>, alinhada ao IFRS 9). Os indicadores são proprietários e cada banco é sempre comparado <strong>dentro do seu próprio segmento</strong> — comparar um banco digital com um banco de varejo distorceria a leitura. Atualização mensal.</p>
-    </div>
-  </section>
+<section><div class="wrap">
+<h2>Fonte e método</h2>
+<p class="method">Construído sobre os <strong>balancetes mensais oficiais do Banco Central do Brasil</strong>, no novo padrão contábil (<strong>Resolução CMN 4.966/2021</strong>, alinhada ao IFRS 9). Indicadores proprietários, cada banco comparado <strong>dentro do seu segmento</strong>. Bancos em transição que ainda não detalham todos os indicadores aparecem como <strong>"sem dado"</strong> — nunca como zero. Atualização mensal.</p>
+</div></section>
+
+<section class="cta"><div class="wrap" style="text-align:center">
+<h2>Quer explorar mais dados?</h2>
+<p class="cta-sub">Temos a análise completa de mais de 50 instituições financeiras, incluindo indicadores proprietários de <strong>Custos, Gestão, Liquidez e Lucratividade</strong>.</p>
+<p class="cta-mail">Entre em contato para receber o relatório completo:<br>
+<!-- EDITE AQUI: confirme o e-mail de contato -->
+<a href="mailto:saudebancariabr@gmail.com">saudebancariabr@gmail.com</a></p>
+</div></section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <!-- ===== EDITE AQUI: troque [NOME] no rodapé ===== -->
-    Dados referentes a fevereiro de 2026. Conteúdo de caráter informativo, elaborado a partir de fontes públicas do Banco Central do Brasil; não constitui recomendação de investimento. © 2026 [NOME].
- +<hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
-
-<div style="text-align: center; padding: 20px 0;">
-    <h2 style="font-size: 1.5rem; margin-bottom: 10px;">Quer explorar mais dados?</h2>
-    <p style="color: #555; max-width: 600px; margin: 0 auto 20px auto; line-height: 1.6;">
-        Temos a análise completa de mais de 50 instituições financeiras, incluindo indicadores proprietários de <strong>Custos, Gestão, Liquidez e Lucratividade</strong>.
-    </p>
-    <p style="font-size: 1.1rem;">
-        Entre em contato para receber o relatório completo: 
-        <a href="mailto:saude.bancaria@gmail.com" style="color: #0066cc; font-weight: bold; text-decoration: none;">saude.bancaria@gmail.com</a>
-    </p>
-</div>+
-  </div>
-</footer>
-
-</body>
-</html>
+<footer><div class="wrap"><!-- EDITE AQUI: [NOME] -->
+Dados referentes a fevereiro de 2026. Conteúdo de caráter informativo, elaborado a partir de fontes públicas do Banco Central do Brasil; não constitui recomendação de investimento. © 2026 [NOME].
+</div></footer>
+</body></html>
