@@ -5,24 +5,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1a1f2b;--muted:#6b7280;--faint:#9aa0a8;--paper:#fbfaf8;--line:#e6e2da;--authority:#1f3a5f;--risk:#b91c1c;--safe:#2f6b3c;--serif:"Source Serif 4",Georgia,serif;--sans:"Inter",system-ui,sans-serif}
+:root{--ink:#1a1f2b;--muted:#6b7280;--faint:#9aa0a8;--paper:#fbfaf8;--line:#e6e2da;--brand:#076b27;--gold:#e8b016;--risk:#b91c1c;--safe:#2f6b3c;--serif:"Source Serif 4",Georgia,serif;--sans:"Inter",system-ui,sans-serif}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}
 .wrap{max-width:760px;margin:0 auto;padding:0 24px}
-.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--authority);font-weight:600;margin:0 0 14px}
-header.masthead{padding:56px 0 30px;border-bottom:2px solid var(--ink)}
-h1{font-family:var(--serif);font-weight:700;font-size:40px;line-height:1.12;margin:0 0 12px;letter-spacing:-.01em}
-.subtitle{font-family:var(--serif);font-size:19px;color:var(--muted);margin:0 0 22px;font-weight:400}
-.byline{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--muted);padding-top:18px;border-top:1px solid var(--line)}
-.byline strong{color:var(--ink);font-weight:600}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 14px}
+header.masthead{background:var(--brand);padding:52px 0 30px;border-bottom:5px solid var(--gold)}
+h1{font-family:var(--serif);font-weight:700;font-size:40px;line-height:1.12;margin:0 0 12px;letter-spacing:-.01em;color:#fff}
+.subtitle{font-family:var(--serif);font-size:19px;color:#d7e6db;margin:0 0 22px;font-weight:400}
+.byline{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:#cfe0d4;padding-top:18px;border-top:1px solid rgba(255,255,255,.22)}
+.byline strong{color:#fff;font-weight:600}
 section{padding:38px 0;border-bottom:1px solid var(--line)}
-h2{font-family:var(--serif);font-size:24px;font-weight:600;margin:0 0 8px;letter-spacing:-.01em}
+h2{font-family:var(--serif);font-size:24px;font-weight:600;margin:0 0 8px;letter-spacing:-.01em;padding-left:14px;border-left:4px solid var(--gold)}
 .lede{font-size:17px;margin:0 0 24px}
 p{margin:0 0 16px}
 .figure svg{width:100%;height:auto;display:block}
 .cap{font-size:13px;color:var(--faint);margin:6px 2px 0}
 .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;border:none;padding:30px 0}
-.metric{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
-.metric .v{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1}
+.metric{background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:10px;padding:16px 18px}
+.metric .v{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1;color:var(--brand)}
 .metric .l{font-size:13px;color:var(--muted);margin-top:6px}
 .legend{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:14px 0 0}
 .legend span{display:inline-flex;align-items:center;gap:7px}
@@ -33,12 +33,12 @@ table.tend td{padding:9px 6px;border-bottom:1px solid var(--line);vertical-align
 .tend .dr{text-align:right;font-weight:500;white-space:nowrap;width:96px}
 .name-risk{color:var(--risk);font-weight:600}.name-safe{color:var(--safe);font-weight:600}.name-amber{color:#9a6a10;font-weight:600}
 .method{font-size:14.5px;color:var(--muted)}.method strong{color:var(--ink);font-weight:600}
-.cta{background:#f4f1ea;border:none}.cta h2{color:var(--authority);margin-bottom:10px}
+.cta{background:#eef3ee;border:none}.cta h2{color:var(--brand);margin-bottom:10px;border-left:none;padding-left:0}
 .cta-sub{color:var(--muted);max-width:560px;margin:0 auto 18px;font-size:15.5px}
 .cta-sub strong{color:var(--ink)}
 .cta-mail{font-size:16px;margin:0}
-.cta-mail a{display:inline-block;margin-top:8px;background:var(--authority);color:#fff;text-decoration:none;font-weight:600;padding:11px 22px;border-radius:8px}
-.cta-mail a:hover{background:#16304e}
+.cta-mail a{display:inline-block;margin-top:8px;background:var(--brand);color:#fff;text-decoration:none;font-weight:600;padding:11px 22px;border-radius:8px}
+.cta-mail a:hover{background:#054d1c}
 footer{padding:30px 0 60px;font-size:13px;color:var(--faint)}
 @media(max-width:560px){h1{font-size:31px}}
 </style></head><body>
