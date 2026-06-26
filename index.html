@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ===== EDITE AQUI: título da aba ===== -->
+<title>Indicadores de Saúde dos Bancos Brasileiros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1a1f2b; --muted:#6b7280; --faint:#9aa0a8;
+    --paper:#fbfaf8; --line:#e6e2da; --authority:#1f3a5f;
+    --risk:#b91c1c; --safe:#2f6b3c; --amber:#9a6a10;
+    --serif:"Source Serif 4",Georgia,serif; --sans:"Inter",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+       line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--authority);
+           font-weight:600;margin:0 0 14px}
+  header.masthead{padding:56px 0 30px;border-bottom:2px solid var(--ink)}
+  h1{font-family:var(--serif);font-weight:700;font-size:40px;line-height:1.12;margin:0 0 12px;
+     letter-spacing:-.01em}
+  .subtitle{font-family:var(--serif);font-size:19px;color:var(--muted);margin:0 0 22px;font-weight:400}
+  .byline{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--muted);
+          padding-top:18px;border-top:1px solid var(--line)}
+  .byline strong{color:var(--ink);font-weight:600}
+  section{padding:38px 0;border-bottom:1px solid var(--line)}
+  h2{font-family:var(--serif);font-size:24px;font-weight:600;margin:0 0 8px;letter-spacing:-.01em}
+  .lede{font-size:17px;color:var(--ink);margin:0 0 24px}
+  p{margin:0 0 16px}
+  .figure{margin:8px 0 4px}
+  .figure svg{width:100%;height:auto;display:block}
+  .cap{font-size:13px;color:var(--faint);margin:6px 2px 0}
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;
+           border:none;padding:30px 0}
+  .metric{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .metric .v{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1}
+  .metric .l{font-size:13px;color:var(--muted);margin-top:6px}
+  .guide{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;font-size:14.5px}
+  .guide div{display:flex;gap:9px;align-items:flex-start}
+  .dot{width:11px;height:11px;border-radius:3px;margin-top:5px;flex:none}
+  .analysis p strong{font-weight:600}
+  .name-risk{color:var(--risk);font-weight:600}
+  .name-amber{color:var(--amber);font-weight:600}
+  .method{font-size:14.5px;color:var(--muted)}
+  .method strong{color:var(--ink);font-weight:600}
+  footer{padding:30px 0 60px;font-size:13px;color:var(--faint)}
+  footer a{color:var(--muted)}
+  @media(max-width:560px){h1{font-size:31px}.guide{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Dados oficiais do Banco Central · Fevereiro 2026</p>
+    <!-- ===== EDITE AQUI: título e subtítulo ===== -->
+    <h1>Indicadores de Saúde dos Bancos Brasileiros</h1>
+    <p class="subtitle">Risco e desempenho das instituições financeiras, lidos a partir dos balancetes oficiais do Banco Central.</p>
+    <div class="byline">
+      <!-- ===== EDITE AQUI: troque [NOME] pelo nome do seu pai (e CRC, se quiser) ===== -->
+      <span>Análise por <strong>[NOME]</strong></span>
+      <span>Atualização mensal</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <p class="lede">Os balancetes que todo banco entrega ao Banco Central dizem muito sobre a sua saúde — desde que lidos contra os pares. Abaixo, o segmento de bancos digitais posicionado por duas dimensões: quanto capital cada instituição tem para se proteger, e quanta inadimplência carrega.</p>
+
+      <div class="figure">
+        <svg viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa de risco dos bancos digitais por capitalização e inadimplência. O PicPay aparece isolado na zona de atenção, com inadimplência cerca de 3,5 vezes a mediana do segmento e capital abaixo da média.">
+          <rect x="70" y="40" width="159.6" height="229.3" fill="#fbeaea"/>
+          <rect x="229.6" y="269.3" width="420.4" height="80.7" fill="#eaf2ec"/>
+          <line x1="70" y1="350" x2="655" y2="350" stroke="#6b7280" stroke-width="1"/>
+          <line x1="70" y1="40" x2="70" y2="350" stroke="#6b7280" stroke-width="1"/>
+          <line x1="229.6" y1="40" x2="229.6" y2="350" stroke="#c9c5bc" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="70" y1="269.3" x2="655" y2="269.3" stroke="#c9c5bc" stroke-width="1" stroke-dasharray="4 4"/>
+          <text x="234" y="55" font-size="11" fill="#9aa0a8" font-family="Inter,sans-serif">mediana de capital</text>
+          <text x="648" y="264" font-size="11" text-anchor="end" fill="#9aa0a8" font-family="Inter,sans-serif">mediana de inadimplência</text>
+          <text x="80" y="59" font-size="12.5" fill="#b91c1c" font-family="Inter,sans-serif" font-weight="600">atenção</text>
+          <text x="648" y="343" font-size="12.5" text-anchor="end" fill="#2f6b3c" font-family="Inter,sans-serif" font-weight="600">saudável</text>
+          <text x="0" y="0" font-size="12.5" fill="#6b7280" font-family="Inter,sans-serif" transform="translate(26,195) rotate(-90)" text-anchor="middle">inadimplência  →  mais risco</text>
+          <text x="362" y="410" font-size="12.5" fill="#6b7280" font-family="Inter,sans-serif" text-anchor="middle">capitalização  →  mais segurança</text>
+          <circle cx="90.5" cy="296.3" r="5" fill="#9aa0a8"/><text x="98" y="293" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">Digio</text>
+          <circle cx="120.2" cy="300.4" r="5" fill="#9aa0a8"/><text x="128" y="304" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">C6</text>
+          <circle cx="190.8" cy="335.5" r="5" fill="#9aa0a8"/><text x="198" y="339" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">XP</text>
+          <circle cx="206.8" cy="350" r="5" fill="#9aa0a8"/><text x="200" y="343" font-size="11" fill="#6b7280" font-family="Inter,sans-serif" text-anchor="end">VR</text>
+          <circle cx="231.9" cy="350" r="5" fill="#9aa0a8"/><text x="240" y="347" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">Digimais</text>
+          <circle cx="245.6" cy="271.5" r="5" fill="#9aa0a8"/><text x="253" y="275" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">BMG</text>
+          <circle cx="227.3" cy="252.9" r="5" fill="#9aa0a8"/><text x="221" y="250" font-size="11" fill="#6b7280" font-family="Inter,sans-serif" text-anchor="end">Original</text>
+          <circle cx="247.8" cy="238.4" r="5" fill="#9aa0a8"/><text x="255" y="236" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">Inter</text>
+          <circle cx="348.2" cy="267.3" r="5" fill="#9aa0a8"/><text x="356" y="270" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">BS2</text>
+          <circle cx="599" cy="149.5" r="5" fill="#9aa0a8"/><text x="591" y="146" font-size="11" fill="#6b7280" font-family="Inter,sans-serif" text-anchor="end">BV</text>
+          <circle cx="323.1" cy="85.5" r="6" fill="#ba7517"/><text x="331" y="82" font-size="12.5" fill="#9a6a10" font-family="Inter,sans-serif" font-weight="600">PAN</text>
+          <text x="331" y="96" font-size="10" fill="#9aa0a8" font-family="Inter,sans-serif">inadimplência alta, capital alto</text>
+          <circle cx="206.8" cy="68.9" r="8" fill="#c0392b"/><text x="218" y="66" font-size="13.5" fill="#b91c1c" font-family="Inter,sans-serif" font-weight="600">PicPay</text>
+          <text x="218" y="80" font-size="10" fill="#9aa0a8" font-family="Inter,sans-serif">inadimplência ~3,5× a mediana</text>
+        </svg>
+      </div>
+      <p class="cap">Cada ponto é um banco do segmento digital. Posição horizontal: capitalização. Posição vertical: inadimplência. Linhas tracejadas: medianas do segmento.</p>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="metrics">
+      <div class="metric"><div class="v">12</div><div class="l">bancos no segmento digital</div></div>
+      <div class="metric"><div class="v">7%</div><div class="l">capitalização mediana</div></div>
+      <div class="metric"><div class="v">3,9%</div><div class="l">inadimplência mediana</div></div>
+      <div class="metric"><div class="v">fev/26</div><div class="l">mês de referência</div></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2>Como ler o mapa</h2>
+      <div class="guide">
+        <div><span class="dot" style="background:#9aa0a8"></span><span>Quanto mais à <strong>direita</strong>, mais capital o banco tem — mais protegido.</span></div>
+        <div><span class="dot" style="background:#9aa0a8"></span><span>Quanto mais para <strong>cima</strong>, maior a inadimplência — mais risco.</span></div>
+        <div><span class="dot" style="background:#f0c0c0"></span><span>Canto superior esquerdo: <strong style="color:var(--risk)">atenção</strong> — pouco capital e muita inadimplência.</span></div>
+        <div><span class="dot" style="background:#bcd8c2"></span><span>Canto inferior direito: <strong style="color:var(--safe)">saudável</strong> — bem capitalizado e inadimplência baixa.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="analysis">
+    <div class="wrap">
+      <h2>A leitura do mês</h2>
+      <p>Um nome se destaca pelo risco: o <span class="name-risk">PicPay</span>. Sua inadimplência está em torno de <strong>três vezes e meia a mediana</strong> dos bancos digitais, enquanto seu capital fica abaixo da média do grupo. É a combinação que pede atenção — mais perda de crédito que os concorrentes, com menos colchão para absorvê-la. Sozinho, o número "6% de capital" não diria nada; é a posição contra os pares que conta a história.</p>
+      <p>O contraste com o <span class="name-amber">Banco PAN</span> é instrutivo. O PAN convive com inadimplência parecida, mas mantém capitalização bem acima da média: o mesmo nível de inadimplência significa risco diferente, porque a almofada de capital é maior. Dois bancos com o mesmo número, e situações opostas — algo que só a leitura comparada revela.</p>
+      <p>No extremo oposto, o <strong>BV</strong> aparece como o mais capitalizado do segmento, e nomes como <strong>Digimais</strong> e <strong>BMG</strong> ocupam a zona saudável: capital sólido e inadimplência baixa.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Fonte e método</h2>
+      <p class="method">Construído sobre os <strong>balancetes mensais oficiais do Banco Central do Brasil</strong>, já no novo padrão contábil brasileiro (<strong>Resolução CMN 4.966/2021</strong>, alinhada ao IFRS 9). Os indicadores são proprietários e cada banco é sempre comparado <strong>dentro do seu próprio segmento</strong> — comparar um banco digital com um banco de varejo distorceria a leitura. Atualização mensal.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <!-- ===== EDITE AQUI: troque [NOME] no rodapé ===== -->
+    Dados referentes a fevereiro de 2026. Conteúdo de caráter informativo, elaborado a partir de fontes públicas do Banco Central do Brasil; não constitui recomendação de investimento. © 2026 [NOME].
+  </div>
+</footer>
+
+</body>
+</html>
