@@ -1,194 +1,909 @@
-<!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Indicadores de Saúde dos Bancos Brasileiros</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#1a1f2b;--muted:#6b7280;--faint:#9aa0a8;--paper:#fbfaf8;--line:#e6e2da;--brand:#076b27;--gold:#e8b016;--risk:#b91c1c;--safe:#2f6b3c;--serif:"Source Serif 4",Georgia,serif;--sans:"Inter",system-ui,sans-serif}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.65;-webkit-font-smoothing:antialiased}
-.wrap{max-width:760px;margin:0 auto;padding:0 24px}
-.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 14px}
-header.masthead{background:var(--brand);padding:52px 0 30px;border-bottom:5px solid var(--gold)}
-h1{font-family:var(--serif);font-weight:700;font-size:40px;line-height:1.12;margin:0 0 12px;letter-spacing:-.01em;color:#fff}
-.subtitle{font-family:var(--serif);font-size:19px;color:#d7e6db;margin:0 0 22px;font-weight:400}
-.byline{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:#cfe0d4;padding-top:18px;border-top:1px solid rgba(255,255,255,.22)}
-.byline strong{color:#fff;font-weight:600}
-section{padding:38px 0;border-bottom:1px solid var(--line)}
-h2{font-family:var(--serif);font-size:24px;font-weight:600;margin:0 0 8px;letter-spacing:-.01em;padding-left:14px;border-left:4px solid var(--gold)}
-.lede{font-size:17px;margin:0 0 24px}
-p{margin:0 0 16px}
-.figure svg{width:100%;height:auto;display:block}
-.cap{font-size:13px;color:var(--faint);margin:6px 2px 0}
-.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;border:none;padding:30px 0}
-.metric{background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:10px;padding:16px 18px}
-.metric .v{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1;color:var(--brand)}
-.metric .l{font-size:13px;color:var(--muted);margin-top:6px}
-.legend{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin:14px 0 0}
-.legend span{display:inline-flex;align-items:center;gap:7px}
-.ln{width:22px;height:0;border-top:2.5px solid}
-table.tend{width:100%;border-collapse:collapse;font-size:14px}
-table.tend td{padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:middle}
-.tend .bk{font-weight:500}.tend .sp{width:90px}.tend .vl{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
-a.cardlink{color:var(--brand);font-weight:600;text-decoration:none;border-bottom:1px solid #b9d3bf}a.cardlink:hover{border-bottom-color:var(--brand)}
-.tend .dr{text-align:right;font-weight:500;white-space:nowrap;width:96px}
-.name-risk{color:var(--risk);font-weight:600}.name-safe{color:var(--safe);font-weight:600}.name-amber{color:#9a6a10;font-weight:600}
-.method{font-size:14.5px;color:var(--muted)}.method strong{color:var(--ink);font-weight:600}
-.cta{background:#eef3ee;border:none}.cta h2{color:var(--brand);margin-bottom:10px;border-left:none;padding-left:0}
-.cta-sub{color:var(--muted);max-width:560px;margin:0 auto 18px;font-size:15.5px}
-.cta-sub strong{color:var(--ink)}
-.cta-mail{font-size:16px;margin:0}
-.cta-mail a{display:inline-block;margin-top:8px;background:var(--brand);color:#fff;text-decoration:none;font-weight:600;padding:11px 22px;border-radius:8px}
-.cta-mail a:hover{background:#054d1c}
-footer{padding:30px 0 60px;font-size:13px;color:var(--faint)}
-@media(max-width:560px){h1{font-size:31px}}
-</style></head><body>
+<!DOCTYPE html>
+<html lang="de" class="h-full bg-slate-50">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baufinanzierungsrechner - mit Kaufnebenkosten & Tilgungsplan</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-<header class="masthead"><div class="wrap">
-<p class="eyebrow">Dados oficiais do Banco Central · Fevereiro 2026</p>
-<!-- EDITE AQUI: título e subtítulo -->
-<h1>Indicadores de Saúde dos Bancos Brasileiros</h1>
-<p class="subtitle">Risco e desempenho das instituições financeiras, lidos a partir dos balancetes oficiais do Banco Central.</p>
-<div class="byline"><!-- EDITE AQUI: [NOME] --><span>Análise por <strong>[NOME]</strong></span><span>Atualização mensal</span></div>
-</div></header>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              800: '#0c4a6e',
+              900: '#0f3750'
+            }
+          }
+        }
+      }
+    }
+  </script>
 
-<main>
-<section><div class="wrap">
-<p class="lede">Onde cada banco digital está hoje: quanto capital tem para se proteger (horizontal) e quanta inadimplência carrega (vertical). Mas a posição é só metade da história — a outra metade é a direção.</p>
-<div class="figure"><svg viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa de comparação dos bancos digitais em fevereiro de 2026.">
-<rect x="70" y="40" width="159.6" height="219.1" fill="#fbeaea"/>
-<rect x="229.6" y="259.1" width="410.4" height="90.9" fill="#eaf2ec"/>
-<line x1="70" y1="350" x2="655" y2="350" stroke="#6b7280"/><line x1="70" y1="40" x2="70" y2="350" stroke="#6b7280"/>
-<line x1="229.6" y1="40" x2="229.6" y2="350" stroke="#c9c5bc" stroke-dasharray="4 4"/>
-<line x1="70" y1="259.1" x2="655" y2="259.1" stroke="#c9c5bc" stroke-dasharray="4 4"/>
-<text x="80" y="59" font-size="12" fill="#b91c1c" font-family="Inter,sans-serif" font-weight="600">pior que os pares</text>
-<text x="648" y="343" font-size="12" fill="#2f6b3c" font-family="Inter,sans-serif" font-weight="600" text-anchor="end">melhor que os pares</text>
-<text x="0" y="0" font-size="12.5" fill="#6b7280" font-family="Inter,sans-serif" transform="translate(26,195) rotate(-90)" text-anchor="middle">inadimplência  →  maior</text>
-<text x="362" y="410" font-size="12.5" fill="#6b7280" font-family="Inter,sans-serif" text-anchor="middle">capitalização  →  maior</text>
-<circle cx="247.8" cy="238.4" r="5" fill="#9aa0a8"/><text x="256.8" y="229.4" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="start">Inter</text>
-<circle cx="599.0" cy="149.5" r="5" fill="#9aa0a8"/><text x="590.0" y="140.5" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="end">BV</text>
-<circle cx="206.8" cy="68.9" r="8" fill="#c0392b"/><text x="215.8" y="59.9" font-size="11.5" fill="#b91c1c" font-family="Inter,sans-serif" font-weight="600" text-anchor="start">PicPay</text>
-<circle cx="90.5" cy="296.3" r="5" fill="#9aa0a8"/><text x="81.5" y="287.3" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="end">Digio</text>
-<circle cx="120.2" cy="300.4" r="5" fill="#9aa0a8"/><text x="129.2" y="291.4" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="start">C6</text>
-<circle cx="190.8" cy="335.5" r="5" fill="#9aa0a8"/><text x="199.8" y="326.5" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="start">XP</text>
-<circle cx="323.1" cy="85.5" r="6" fill="#ba7517"/><text x="332.1" y="76.5" font-size="11.5" fill="#9a6a10" font-family="Inter,sans-serif" font-weight="600" text-anchor="start">PAN</text>
-<circle cx="245.6" cy="271.5" r="5" fill="#9aa0a8"/><text x="254.6" y="262.5" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="start">BMG</text>
-<circle cx="348.2" cy="267.3" r="5" fill="#9aa0a8"/><text x="357.2" y="258.3" font-size="11.5" fill="#6b7280" font-family="Inter,sans-serif" font-weight="400" text-anchor="start">BS2</text>
-<circle cx="227.3" cy="252.9" r="7" fill="#2f6b3c"/><text x="218.3" y="243.9" font-size="11.5" fill="#2f6b3c" font-family="Inter,sans-serif" font-weight="600" text-anchor="end">Original</text>
-</svg></div>
-<p class="cap">Segmento digital, fevereiro/2026. Linhas tracejadas: medianas. Dois bancos do segmento ainda não reportam a carteira por estágios e ficam fora do mapa.</p>
-</div></section>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      .print-only {
+        display: block !important;
+      }
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .shadow-xl, .shadow-md, .shadow-sm {
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="h-full text-slate-800 antialiased flex flex-col min-h-screen">
 
-<div class="wrap"><div class="metrics">
-<div class="metric"><div class="v">10</div><div class="l">bancos com dados completos</div></div>
-<div class="metric"><div class="v">7%</div><div class="l">capitalização mediana</div></div>
-<div class="metric"><div class="v">4,4%</div><div class="l">inadimplência mediana</div></div>
-<div class="metric"><div class="v">fev/26</div><div class="l">mês de referência</div></div>
-</div></div>
+  <header class="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-30 no-print">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2.5 bg-brand-600 rounded-xl text-white shadow-lg shadow-brand-600/30">
+          <i data-lucide="home" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+            Baufinanzierungsrechner
+            <span class="text-xs bg-brand-500/20 text-brand-300 font-medium px-2.5 py-0.5 rounded-full border border-brand-500/30">Inkl. Nebenkosten</span>
+          </h1>
+          <p class="text-xs text-slate-400">Immobilienkredit, Grunderwerbsteuer, Zinsen & Tilgungsplan</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="exportCSV()" class="inline-flex items-center gap-1.5 text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 px-3.5 py-2 rounded-lg border border-slate-700 transition">
+          <i data-lucide="download" class="w-4 h-4"></i> CSV Export
+        </button>
+        <button onclick="window.print()" class="inline-flex items-center gap-1.5 text-xs font-medium bg-brand-600 hover:bg-brand-500 text-white px-3.5 py-2 rounded-lg shadow-md transition">
+          <i data-lucide="printer" class="w-4 h-4"></i> Drucken / PDF
+        </button>
+      </div>
+    </div>
+  </header>
 
-<section><div class="wrap">
-<h2>A direção importa tanto quanto a posição</h2>
-<p>Dois bancos podem estar no mesmo ponto do mapa e contar histórias opostas. Veja a inadimplência ao longo dos últimos meses: o <span class="name-risk">PicPay</span> vem <strong>subindo</strong> desde que passou a reportar a carteira por estágios; o <span class="name-safe">Original</span>, que já esteve perto de 15%, vem <strong>caindo</strong> de forma consistente. Mesma vizinhança, rumos contrários.</p>
-<div class="figure"><svg viewBox="0 0 680 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trajetória da inadimplência: PicPay subindo, Original caindo.">
-<text x="52" y="304.0" font-size="10" fill="#9aa0a8" text-anchor="end" font-family="Inter,sans-serif">0%</text><line x1="60" y1="300.0" x2="650" y2="300.0" stroke="#eee8df" stroke-width="1"/><text x="52" y="236.5" font-size="10" fill="#9aa0a8" text-anchor="end" font-family="Inter,sans-serif">4%</text><line x1="60" y1="232.5" x2="650" y2="232.5" stroke="#eee8df" stroke-width="1"/><text x="52" y="169.0" font-size="10" fill="#9aa0a8" text-anchor="end" font-family="Inter,sans-serif">8%</text><line x1="60" y1="165.0" x2="650" y2="165.0" stroke="#eee8df" stroke-width="1"/><text x="52" y="101.5" font-size="10" fill="#9aa0a8" text-anchor="end" font-family="Inter,sans-serif">12%</text><line x1="60" y1="97.5" x2="650" y2="97.5" stroke="#eee8df" stroke-width="1"/><text x="52" y="34.0" font-size="10" fill="#9aa0a8" text-anchor="end" font-family="Inter,sans-serif">16%</text><line x1="60" y1="30.0" x2="650" y2="30.0" stroke="#eee8df" stroke-width="1"/>
-<line x1="60" y1="30" x2="60" y2="300" stroke="#6b7280"/><line x1="60" y1="300" x2="650" y2="300" stroke="#6b7280"/>
-<text x="60.0" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">jan/25</text><text x="150.8" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">mar</text><text x="241.5" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">mai</text><text x="332.3" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">jul</text><text x="423.1" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">set</text><text x="513.8" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">nov</text><text x="604.6" y="318" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">jan/26</text>
-<polyline points="60.0,40.1 105.4,51.9 150.8,68.8 196.2,60.4 241.5,72.2 286.9,97.5 332.3,72.2 377.7,100.9 423.1,148.1 468.5,124.5 513.8,144.8 559.2,180.2 604.6,203.8 650.0,220.7" fill="none" stroke="#2f6b3c" stroke-width="2.5"/>
-<circle cx="60.0" cy="40.1" r="3" fill="#2f6b3c"/>
-<circle cx="105.4" cy="51.9" r="3" fill="#2f6b3c"/>
-<circle cx="150.8" cy="68.8" r="3" fill="#2f6b3c"/>
-<circle cx="196.2" cy="60.4" r="3" fill="#2f6b3c"/>
-<circle cx="241.5" cy="72.2" r="3" fill="#2f6b3c"/>
-<circle cx="286.9" cy="97.5" r="3" fill="#2f6b3c"/>
-<circle cx="332.3" cy="72.2" r="3" fill="#2f6b3c"/>
-<circle cx="377.7" cy="100.9" r="3" fill="#2f6b3c"/>
-<circle cx="423.1" cy="148.1" r="3" fill="#2f6b3c"/>
-<circle cx="468.5" cy="124.5" r="3" fill="#2f6b3c"/>
-<circle cx="513.8" cy="144.8" r="3" fill="#2f6b3c"/>
-<circle cx="559.2" cy="180.2" r="3" fill="#2f6b3c"/>
-<circle cx="604.6" cy="203.8" r="3" fill="#2f6b3c"/>
-<circle cx="650.0" cy="220.7" r="3" fill="#2f6b3c"/>
-<circle cx="60.0" cy="242.6" r="3" fill="#c0392b"/>
-<polyline points="468.5,141.4 513.8,112.7 559.2,68.8 604.6,73.9 650.0,70.5" fill="none" stroke="#c0392b" stroke-width="2.5"/>
-<circle cx="468.5" cy="141.4" r="3" fill="#c0392b"/>
-<circle cx="513.8" cy="112.7" r="3" fill="#c0392b"/>
-<circle cx="559.2" cy="68.8" r="3" fill="#c0392b"/>
-<circle cx="604.6" cy="73.9" r="3" fill="#c0392b"/>
-<circle cx="650.0" cy="70.5" r="3" fill="#c0392b"/>
-<text x="655" y="68.5" font-size="12" fill="#b91c1c" font-family="Inter,sans-serif" font-weight="600" text-anchor="end">PicPay ↑</text>
-<text x="120" y="34.1" font-size="12" fill="#2f6b3c" font-family="Inter,sans-serif" font-weight="600">Original ↓</text>
-</svg></div>
-<p class="cap">Inadimplência (% da carteira) por mês. O PicPay não reportava estágios antes de out/2025 — por isso a linha começa ali, sem inventar valores.</p>
-</div></section>
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
-<section><div class="wrap">
-<h2>Para onde cada banco caminha</h2>
-<p>O momentum do segmento de relance: a mini-linha mostra a trajetória da inadimplência de cada banco, e a coluna à direita resume a direção.</p>
-<table class="tend"><tbody>
-<tr><td class="bk">Inter</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,10.0 8.2,7.3 14.3,6.5 20.5,11.7 26.6,11.7 32.8,13.4 38.9,12.6 45.1,12.6 51.2,13.4 57.4,23.0 63.5,10.0 69.7,8.2 75.8,5.6 82.0,3.0" fill="none" stroke="#c0392b" stroke-width="1.6"/><circle cx="82.0" cy="3.0" r="2.2" fill="#c0392b"/></svg></td><td class="vl">5.4%</td><td class="dr" style="color:#b91c1c">↑ subindo</td></tr><tr><td class="bk">BV</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,19.2 8.2,23.0 14.3,23.0 20.5,17.0 26.6,17.0 32.8,16.6 38.9,15.8 45.1,16.2 51.2,13.2 57.4,11.9 63.5,10.7 69.7,9.8 75.8,7.7 82.0,3.0" fill="none" stroke="#c0392b" stroke-width="1.6"/><circle cx="82.0" cy="3.0" r="2.2" fill="#c0392b"/></svg></td><td class="vl">9.7%</td><td class="dr" style="color:#b91c1c">↑ subindo</td></tr><tr><td class="bk"><a class="cardlink" href="card_picpay.html">PicPay &rsaquo;</a></td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="57.4,11.3 63.5,8.0 69.7,3.0 75.8,3.6 82.0,3.2" fill="none" stroke="#c0392b" stroke-width="1.6"/><circle cx="82.0" cy="3.2" r="2.2" fill="#c0392b"/></svg></td><td class="vl">13.6%</td><td class="dr" style="color:#b91c1c">↑ subindo</td></tr><tr><td class="bk">Digio</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,3.0 8.2,3.3 14.3,17.9 20.5,16.4 26.6,17.6 32.8,19.0 38.9,20.4 45.1,20.4 51.2,20.1 57.4,21.6 63.5,21.9 69.7,21.9 75.8,23.0 82.0,23.0" fill="none" stroke="#2f6b3c" stroke-width="1.6"/><circle cx="82.0" cy="23.0" r="2.2" fill="#2f6b3c"/></svg></td><td class="vl">2.6%</td><td class="dr" style="color:#2f6b3c">↓ caindo</td></tr><tr><td class="bk">C6</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,11.3 8.2,9.7 14.3,8.0 20.5,6.3 26.6,6.3 32.8,3.0 38.9,8.0 45.1,9.7 51.2,11.3 57.4,19.7 63.5,18.0 69.7,23.0 75.8,23.0 82.0,21.3" fill="none" stroke="#9aa0a8" stroke-width="1.6"/><circle cx="82.0" cy="21.3" r="2.2" fill="#9aa0a8"/></svg></td><td class="vl">2.4%</td><td class="dr" style="color:#9aa0a8">→ estável</td></tr><tr><td class="bk">XP</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,23.0 8.2,19.0 14.3,11.0 20.5,3.0 26.6,11.0 32.8,15.0 38.9,11.0 45.1,11.0 51.2,11.0 57.4,3.0 63.5,3.0 69.7,3.0 75.8,7.0 82.0,11.0" fill="none" stroke="#9aa0a8" stroke-width="1.6"/><circle cx="82.0" cy="11.0" r="2.2" fill="#9aa0a8"/></svg></td><td class="vl">0.7%</td><td class="dr" style="color:#9aa0a8">→ estável</td></tr><tr><td class="bk">PAN</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,23.0 8.2,20.2 14.3,15.8 20.5,12.4 26.6,7.4 32.8,8.6 38.9,3.0 45.1,3.0 51.2,6.3 57.4,6.9 63.5,4.1 69.7,8.0 75.8,6.3 82.0,7.4" fill="none" stroke="#2f6b3c" stroke-width="1.6"/><circle cx="82.0" cy="7.4" r="2.2" fill="#2f6b3c"/></svg></td><td class="vl">12.8%</td><td class="dr" style="color:#2f6b3c">↓ caindo</td></tr><tr><td class="bk">BMG</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,23.0 8.2,20.8 14.3,20.8 20.5,11.9 26.6,7.4 32.8,7.4 38.9,9.7 45.1,3.0 51.2,5.2 57.4,7.4 63.5,7.4 69.7,11.9 75.8,7.4 82.0,3.0" fill="none" stroke="#9aa0a8" stroke-width="1.6"/><circle cx="82.0" cy="3.0" r="2.2" fill="#9aa0a8"/></svg></td><td class="vl">3.8%</td><td class="dr" style="color:#9aa0a8">→ estável</td></tr><tr><td class="bk">BS2</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,23.0 8.2,23.0 14.3,22.1 20.5,19.4 26.6,15.7 32.8,14.8 38.9,13.9 45.1,6.6 51.2,8.5 57.4,5.7 63.5,3.0 69.7,9.4 75.8,5.7 82.0,3.9" fill="none" stroke="#9aa0a8" stroke-width="1.6"/><circle cx="82.0" cy="3.9" r="2.2" fill="#9aa0a8"/></svg></td><td class="vl">4.0%</td><td class="dr" style="color:#9aa0a8">→ estável</td></tr><tr><td class="bk">Original</td><td class="sp"><svg width="84" height="26" viewBox="0 0 84 26"><polyline points="2.0,3.0 8.2,4.3 14.3,6.2 20.5,5.2 26.6,6.6 32.8,9.4 38.9,6.6 45.1,9.7 51.2,15.0 57.4,12.3 63.5,14.6 69.7,18.5 75.8,21.1 82.0,23.0" fill="none" stroke="#2f6b3c" stroke-width="1.6"/><circle cx="82.0" cy="23.0" r="2.2" fill="#2f6b3c"/></svg></td><td class="vl">4.7%</td><td class="dr" style="color:#2f6b3c">↓ caindo</td></tr>
-</tbody></table>
-</div></section>
+    <!-- Top Inputs & Summary Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Input Controls Section -->
+      <section class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-6 no-print">
+        <div class="border-b border-slate-100 pb-4 flex justify-between items-center">
+          <h2 class="text-lg font-semibold text-slate-900 flex items-center gap-2">
+            <i data-lucide="sliders" class="w-5 h-5 text-brand-600"></i>
+            Eingabedaten & Nebenkosten
+          </h2>
+          <button onclick="resetDefaults()" class="text-xs text-slate-500 hover:text-brand-600 flex items-center gap-1">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i> Zurücksetzen
+          </button>
+        </div>
 
-<section><div class="wrap">
-<h2>Nem todo banco digital faz a mesma coisa</h2>
-<p>Antes de julgar inadimplência, vale ver <strong>quanto cada banco realmente empresta</strong>. Os de barra maior são máquinas de crédito — emprestam muito e estão mais expostos ao crédito por natureza. Os de barra curta quase não emprestam: o XP, por exemplo, é essencialmente investimentos. Comparar a inadimplência de quem empresta 80% do ativo com quem empresta 10% é comparar coisas diferentes.</p>
-<div class="figure"><svg viewBox="0 0 680 302" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Participacao do credito no ativo, por banco.">
-<line x1="376.5" y1="6" x2="376.5" y2="284.0" stroke="#c9c5bc" stroke-dasharray="4 4"/>
-<text x="376.5" y="295.0" font-size="10" fill="#9aa0a8" text-anchor="middle" font-family="Inter,sans-serif">mediana 48%</text>
-<text x="84" y="27.0" font-size="12" fill="#1a1f2b" text-anchor="end" font-family="Inter,sans-serif">PAN</text>
-<rect x="92" y="17.0" width="467.0" height="14" rx="2" fill="#076b27" opacity="0.85"/>
-<text x="565.0" y="28.0" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">80%</text>
-<text x="84" y="54.0" font-size="12" fill="#1a1f2b" text-anchor="end" font-family="Inter,sans-serif">Digio</text>
-<rect x="92" y="44.0" width="435.9" height="14" rx="2" fill="#076b27" opacity="0.85"/>
-<text x="533.9" y="55.0" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">74%</text>
-<text x="84" y="81.0" font-size="12" fill="#1a1f2b" text-anchor="end" font-family="Inter,sans-serif">BV</text>
-<rect x="92" y="71.0" width="401.3" height="14" rx="2" fill="#076b27" opacity="0.85"/>
-<text x="499.3" y="82.0" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">68%</text>
-<text x="84" y="108.0" font-size="12" fill="#1a1f2b" text-anchor="end" font-family="Inter,sans-serif">BMG</text>
-<rect x="92" y="98.0" width="322.1" height="14" rx="2" fill="#076b27" opacity="0.85"/>
-<text x="420.1" y="109.0" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">55%</text>
-<text x="84" y="135.0" font-size="12" fill="#1a1f2b" text-anchor="end" font-family="Inter,sans-serif">PicPay</text>
-<rect x="92" y="125.0" width="315.6" height="14" rx="2" fill="#076b27" opacity="0.85"/>
-<text x="413.6" y="136.0" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">54%</text>
-<text x="84" y="162.0" font-size="12" fill="#1a1f2b" text-anchor="end" font-family="Inter,sans-serif">Original</text>
-<rect x="92" y="152.0" width="253.4" height="14" rx="2" fill="#9aa0a8" opacity="0.85"/>
-<text x="351.4" y="163.0" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">43%</text>
-<text x="84" y="189.0" font-size="12" fill="#1a1f2b" text-anchor="end" font-family="Inter,sans-serif">Inter</text>
-<rect x="92" y="179.0" width="247.6" height="14" rx="2" fill="#9aa0a8" opacity="0.85"/>
-<text x="345.6" y="190.0" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">42%</text>
-<text x="84" y="216.0" font-size="12" fill="#1a1f2b" text-anchor="end" font-family="Inter,sans-serif">C6</text>
-<rect x="92" y="206.0" width="239.4" height="14" rx="2" fill="#9aa0a8" opacity="0.85"/>
-<text x="337.4" y="217.0" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">41%</text>
-<text x="84" y="243.0" font-size="12" fill="#1a1f2b" text-anchor="end" font-family="Inter,sans-serif">BS2</text>
-<rect x="92" y="233.0" width="156.1" height="14" rx="2" fill="#9aa0a8" opacity="0.85"/>
-<text x="254.1" y="244.0" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">27%</text>
-<text x="84" y="270.0" font-size="12" fill="#1a1f2b" text-anchor="end" font-family="Inter,sans-serif">XP</text>
-<rect x="92" y="260.0" width="59.3" height="14" rx="2" fill="#9aa0a8" opacity="0.85"/>
-<text x="157.3" y="271.0" font-size="11" fill="#6b7280" font-family="Inter,sans-serif">10%</text>
-</svg></div>
-<p class="cap">Participação do crédito no ativo operacional, fevereiro/2026. Verde = acima da mediana do segmento.</p>
-</div></section>
+        <form id="calculatorForm" class="space-y-5" onsubmit="event.preventDefault();">
 
-<section><div class="wrap">
-<h2>A leitura do mês — comparação entre pares</h2>
-<p>Frente aos pares, o <span class="name-risk">PicPay</span> é o que está pior posicionado: inadimplência acima de três vezes a mediana do segmento <strong>e em alta</strong>, com capital abaixo da média. Já o <span class="name-amber">PAN</span> tem inadimplência igualmente alta, mas capital bem acima dos pares — mesmo número, posição diferente. E o <span class="name-safe">Original</span> mostra que a trajetória conta: ainda abaixo da mediana, mas vindo de uma queda forte — melhorando, não piorando.</p>
-</div></section>
+          <!-- Kaufpreis -->
+          <div>
+            <div class="flex justify-between items-center mb-1.5">
+              <label for="purchasePrice" class="text-sm font-medium text-slate-700">Kaufpreis der Immobilie (€)</label>
+              <span id="purchasePriceVal" class="text-xs font-semibold text-brand-700 bg-brand-50 px-2 py-0.5 rounded">400.000 €</span>
+            </div>
+            <div class="relative rounded-md shadow-sm">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">€</div>
+              <input type="number" id="purchasePrice" value="400000" step="5000" min="10000" max="5000000" 
+                class="block w-full pl-8 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-brand-500 focus:border-brand-500 text-sm font-medium">
+            </div>
+          </div>
 
-<section><div class="wrap">
-<h2>Fonte e método</h2>
-<p class="method">Construído sobre os <strong>balancetes mensais oficiais do Banco Central do Brasil</strong>, no novo padrão contábil (<strong>Resolução CMN 4.966/2021</strong>, alinhada ao IFRS 9). Indicadores proprietários, cada banco comparado <strong>dentro do seu segmento</strong>. Bancos em transição que ainda não detalham todos os indicadores aparecem como <strong>"sem dado"</strong> — nunca como zero. Atualização mensal.</p>
-</div></section>
+          <!-- Kaufnebenkosten Accordion / Box -->
+          <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80 space-y-3.5">
+            <div class="flex justify-between items-center border-b border-slate-200/60 pb-2">
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                <i data-lucide="receipt" class="w-4 h-4 text-brand-600"></i> Kaufnebenkosten
+              </span>
+              <span id="totalAncillaryDisplay" class="text-xs font-bold text-slate-900">+41.080 € (10,27%)</span>
+            </div>
 
-<section class="cta"><div class="wrap" style="text-align:center">
-<h2>Quer explorar mais dados?</h2>
-<p class="cta-sub">Temos a análise completa de mais de 50 instituições financeiras, incluindo indicadores proprietários de <strong>Custos, Gestão, Liquidez e Lucratividade</strong>.</p>
-<p class="cta-mail">Entre em contato para receber o relatório completo:<br>
-<!-- EDITE AQUI: confirme o e-mail de contato -->
-<a href="mailto:saudebancariabr@gmail.com">saudebancariabr@gmail.com</a></p>
-</div></section>
-</main>
+            <!-- State Selector for Grunderwerbsteuer -->
+            <div>
+              <label for="federalState" class="text-xs font-medium text-slate-600 block mb-1">Bundesland (Grunderwerbsteuer)</label>
+              <select id="federalState" onchange="onStateChange()" class="block w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-xs bg-white focus:ring-brand-500 focus:border-brand-500">
+                <option value="3.5" data-state="Bayern">Bayern (3,5%)</option>
+                <option value="5.0" data-state="Baden-Württemberg">Baden-Württemberg (5,0%)</option>
+                <option value="6.0" data-state="Berlin">Berlin (6,0%)</option>
+                <option value="6.5" data-state="Brandenburg">Brandenburg (6,5%)</option>
+                <option value="5.0" data-state="Bremen">Bremen (5,0%)</option>
+                <option value="5.5" data-state="Hamburg">Hamburg (5,5%)</option>
+                <option value="6.0" data-state="Hessen">Hessen (6,0%)</option>
+                <option value="6.0" data-state="Mecklenburg-Vorpommern">Mecklenburg-Vorpommern (6,0%)</option>
 
-<footer><div class="wrap"><!-- EDITE AQUI: [NOME] -->
-Dados referentes a fevereiro de 2026. Conteúdo de caráter informativo, elaborado a partir de fontes públicas do Banco Central do Brasil; não constitui recomendação de investimento. © 2026 [NOME].
-</div></footer>
-</body></html>
+                <option value="5.0" data-state="Niedersachsen">Niedersachsen (5,0%)</option>
+                <option value="6.5" data-state="Nordrhein-Westfalen" selected>Nordrhein-Westfalen (6,5%)</option>
+                <option value="6.5" data-state="Rheinland-Pfalz">Rheinland-Pfalz (6,5%)</option>
+                <option value="6.5" data-state="Saarland">Saarland (6,5%)</option>
+                <option value="5.5" data-state="Sachsen">Sachsen (5,5%)</option>
+                <option value="5.0" data-state="Sachsen-Anhalt">Sachsen-Anhalt (5,0%)</option>
+                <option value="6.5" data-state="Schleswig-Holstein">Schleswig-Holstein (6,5%)</option>
+                <option value="5.0" data-state="Thüringen">Thüringen (5,0%)</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 text-xs">
+              <div>
+                <label for="taxRate" class="text-[11px] font-medium text-slate-500 block mb-1">Steuer (%)</label>
+                <input type="number" id="taxRate" value="6.5" step="0.1" min="0" max="10" 
+                  class="w-full px-2 py-1.5 border border-slate-300 rounded-md text-xs bg-white text-center">
+              </div>
+              <div>
+                <label for="notaryRate" class="text-[11px] font-medium text-slate-500 block mb-1">Notar/Grundb. (%)</label>
+                <input type="number" id="notaryRate" value="1.5" step="0.1" min="0" max="5" 
+                  class="w-full px-2 py-1.5 border border-slate-300 rounded-md text-xs bg-white text-center">
+              </div>
+              <div>
+                <label for="agentRate" class="text-[11px] font-medium text-slate-500 block mb-1">Makler (%)</label>
+                <input type="number" id="agentRate" value="3.57" step="0.01" min="0" max="10" 
+                  class="w-full px-2 py-1.5 border border-slate-300 rounded-md text-xs bg-white text-center">
+              </div>
+            </div>
+          </div>
+
+          <!-- Total Property Cost Breakdown -->
+          <div class="p-3 bg-slate-900 text-white rounded-xl flex justify-between items-center text-xs">
+            <div>
+              <span class="text-slate-400 block text-[11px]">Gesamtkosten (Kaufpreis + Nebenkosten)</span>
+              <span id="totalCostDisplay" class="text-sm font-bold text-white">441.080 €</span>
+            </div>
+            <i data-lucide="coins" class="w-5 h-5 text-brand-400"></i>
+          </div>
+
+          <!-- Eigenkapital -->
+          <div>
+            <div class="flex justify-between items-center mb-1.5">
+              <label for="equity" class="text-sm font-medium text-slate-700">Eigenkapital (€)</label>
+              <span id="equityPercent" class="text-xs text-slate-500">(18.1% der Gesamtkosten)</span>
+            </div>
+            <div class="relative rounded-md shadow-sm">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">€</div>
+              <input type="number" id="equity" value="80000" step="2500" min="0" max="5000000" 
+                class="block w-full pl-8 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-brand-500 focus:border-brand-500 text-sm font-medium">
+            </div>
+            <!-- Dynamic Alert for Equity Adequacy -->
+            <div id="equityWarning" class="hidden mt-2 p-2 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-2 text-xs text-amber-800">
+              <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
+              <span id="equityWarningText">Hinweis: Das Eigenkapital deckt nicht die Kaufnebenkosten vollständig ab.</span>
+            </div>
+          </div>
+
+          <!-- Calculated Net Loan Amount -->
+          <div class="p-3 bg-brand-50 rounded-xl border border-brand-200 flex justify-between items-center">
+            <div>
+              <span class="text-xs font-semibold text-brand-800 block">Nettodarlehensbetrag (Finanzierung)</span>
+              <span id="loanAmountDisplay" class="text-lg font-bold text-brand-700">361.080 €</span>
+            </div>
+            <i data-lucide="calculator" class="w-5 h-5 text-brand-600"></i>
+          </div>
+
+          <!-- Sollzinssatz p.a. & Zinsbindung -->
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="interestRate" class="text-sm font-medium text-slate-700 block mb-1.5">Sollzins p.a. (%)</label>
+              <div class="relative rounded-md shadow-sm">
+                <input type="number" id="interestRate" value="3.6" step="0.05" min="0.1" max="15" 
+                  class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-brand-500 focus:border-brand-500 text-sm">
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">%</div>
+              </div>
+            </div>
+
+            <div>
+              <label for="fixedPeriodSelect" class="text-sm font-medium text-slate-700 block mb-1.5">Zinsbindung</label>
+              <select id="fixedPeriodSelect" onchange="setFixedPeriod(parseInt(this.value))" class="block w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:ring-brand-500 focus:border-brand-500">
+                <option value="5">5 Jahre</option>
+                <option value="10">10 Jahre</option>
+                <option value="15" selected>15 Jahre</option>
+                <option value="20">20 Jahre</option>
+                <option value="25">25 Jahre</option>
+                <option value="30">30 Jahre</option>
+              </select>
+              <input type="hidden" id="fixedPeriod" value="15">
+            </div>
+          </div>
+
+          <!-- Anfängliche Tilgung vs Monthly Rate Toggle -->
+          <div class="border-t border-slate-100 pt-4">
+            <div class="flex items-center justify-between mb-2">
+              <label class="text-sm font-medium text-slate-700">Tilgungsvorgabe</label>
+              <div class="inline-flex rounded-lg p-0.5 bg-slate-100 border border-slate-200 text-xs">
+                <button type="button" id="modePercentBtn" onclick="setRepaymentMode('percent')" class="px-2.5 py-1 rounded-md font-medium transition bg-white shadow-sm text-slate-800">Tilgung %</button>
+                <button type="button" id="modeAmountBtn" onclick="setRepaymentMode('amount')" class="px-2.5 py-1 rounded-md font-medium transition text-slate-500 hover:text-slate-800">Rate (€)</button>
+              </div>
+            </div>
+
+            <div id="repaymentPercentContainer">
+              <div class="relative rounded-md shadow-sm">
+                <input type="number" id="initialRepayment" value="2.0" step="0.1" min="0.5" max="15" 
+                  class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-brand-500 focus:border-brand-500 text-sm">
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">% p.a.</div>
+              </div>
+            </div>
+
+            <div id="repaymentAmountContainer" class="hidden">
+              <div class="relative rounded-md shadow-sm">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">€</div>
+                <input type="number" id="targetMonthlyRate" value="1685" step="50" min="100" max="20000" 
+                  class="block w-full pl-8 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-brand-500 focus:border-brand-500 text-sm">
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">/ Monat</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sondertilgung -->
+          <div class="border-t border-slate-100 pt-4">
+            <div class="flex justify-between items-center mb-1.5">
+              <label for="annualExtra" class="text-sm font-medium text-slate-700 flex items-center gap-1.5">
+                <span>Jährliche Sondertilgung</span>
+              </label>
+              <span class="text-xs text-slate-400">Max. 5% p.a. üblich</span>
+            </div>
+            <div class="relative rounded-md shadow-sm">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">€</div>
+              <input type="number" id="annualExtra" value="0" step="500" min="0" max="100000" 
+                class="block w-full pl-8 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-brand-500 focus:border-brand-500 text-sm">
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">/ Jahr</div>
+            </div>
+          </div>
+
+        </form>
+      </section>
+
+      <section class="lg:col-span-7 space-y-6">
+
+        <!-- Key Metrics Cards Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+          <!-- Card 1: Monthly Payment -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-16 h-16 bg-brand-50 rounded-bl-full pointer-events-none"></div>
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Monatliche Rate</span>
+            <div id="resMonthlyRate" class="text-2xl font-bold text-slate-900">0 €</div>
+            <span id="resRateBreakdown" class="text-xs text-slate-500 mt-1 block">1. Monat: Zins / Tilgung</span>
+          </div>
+
+          <!-- Card 2: Restschuld -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Restschuld nach Zinsbindung</span>
+            <div id="resRestschuld" class="text-2xl font-bold text-brand-600">0 €</div>
+            <span id="resRestschuldPercent" class="text-xs text-slate-500 mt-1 block">0% des Darlehens</span>
+          </div>
+
+          <!-- Card 3: Total Interest (Fixed Period) -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Zinsen (Zinsbindung)</span>
+            <div id="resTotalInterestFixed" class="text-2xl font-bold text-rose-600">0 €</div>
+            <span class="text-xs text-slate-500 mt-1 block">Zinskosten in Sollzinsphase</span>
+          </div>
+
+          <!-- Card 4: Total Amortization Paid -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Getilgt (Zinsbindung)</span>
+            <div id="resTotalPrincipalFixed" class="text-2xl font-bold text-emerald-600">0 €</div>
+            <span id="resPaidPercent" class="text-xs text-slate-500 mt-1 block">0% getilgt</span>
+          </div>
+
+          <!-- Card 5: Total Duration -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Gesamtlaufzeit</span>
+            <div id="resTotalDuration" class="text-2xl font-bold text-slate-900">0 Jahre</div>
+            <span class="text-xs text-slate-500 mt-1 block">Bis zur vollkommenen Schuldenfreiheit</span>
+          </div>
+
+          <!-- Card 6: Total Paid (Fixed) -->
+          <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
+            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Gesamtzahlung (Zinsbindung)</span>
+            <div id="resTotalPaidFixed" class="text-2xl font-bold text-slate-900">0 €</div>
+            <span class="text-xs text-slate-500 mt-1 block">Raten + Sondertilgungen</span>
+          </div>
+
+        </div>
+
+        <!-- Dynamic Visual Chart -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-base font-semibold text-slate-900 flex items-center gap-2">
+              <i data-lucide="line-chart" class="w-4 h-4 text-brand-600"></i>
+              Entwicklung über die Jahre
+            </h3>
+            <div class="text-xs text-slate-500 flex items-center gap-3">
+              <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-slate-800 inline-block"></span> Restschuld</span>
+              <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> Getilgt</span>
+              <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span> Zinsen</span>
+            </div>
+          </div>
+          <div class="relative h-64 sm:h-72 w-full">
+            <canvas id="loanChart"></canvas>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+    <section class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+      <div class="p-6 border-b border-slate-100 flex flex-wrap justify-between items-center gap-4">
+        <div>
+          <h3 class="text-lg font-semibold text-slate-900 flex items-center gap-2">
+            <i data-lucide="table" class="w-5 h-5 text-brand-600"></i>
+            Detaillierter Tilgungsplan
+          </h3>
+          <p class="text-xs text-slate-500 mt-0.5">Vollständiger Verlauf von Restschuld, Zinsen und Tilgung</p>
+        </div>
+
+        <div class="flex items-center gap-3 no-print">
+          <div class="inline-flex rounded-lg p-0.5 bg-slate-100 border border-slate-200 text-xs">
+            <button type="button" id="viewYearlyBtn" onclick="setTableViewMode('yearly')" class="px-3 py-1.5 rounded-md font-medium transition bg-white shadow-sm text-slate-800">Jährlich</button>
+            <button type="button" id="viewMonthlyBtn" onclick="setTableViewMode('monthly')" class="px-3 py-1.5 rounded-md font-medium transition text-slate-500 hover:text-slate-800">Monatlich</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Printable Summary (Print mode only) -->
+      <div class="hidden print-only p-6 border-b border-slate-200">
+        <h2 class="text-xl font-bold mb-2">Baufinanzierungsübersicht & Tilgungsplan</h2>
+        <p id="printSummaryText" class="text-sm text-slate-600 leading-relaxed"></p>
+      </div>
+
+      <!-- Table -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-slate-50 text-slate-600 border-b border-slate-200 text-xs uppercase tracking-wider">
+            <tr>
+              <th scope="col" class="px-6 py-3.5 font-semibold">Zeitraum</th>
+              <th scope="col" class="px-6 py-3.5 font-semibold text-right">Anfangssaldo</th>
+              <th scope="col" class="px-6 py-3.5 font-semibold text-right">Rate / Zahlungen</th>
+              <th scope="col" class="px-6 py-3.5 font-semibold text-right text-rose-600">Zinsanteil</th>
+              <th scope="col" class="px-6 py-3.5 font-semibold text-right text-emerald-600">Tilgungsanteil</th>
+              <th scope="col" class="px-6 py-3.5 font-semibold text-right text-brand-600">Sondertilgung</th>
+              <th scope="col" class="px-6 py-3.5 font-semibold text-right">Restschuld</th>
+            </tr>
+          </thead>
+          <tbody id="tilgungTableBody" class="divide-y divide-slate-100 text-slate-700 font-mono text-xs">
+            <!-- Dynamic Rows -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table Footer / Pagination for Monthly View -->
+      <div id="tablePagination" class="p-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500 no-print hidden">
+        <span id="pageInfo">Zeige Monate 1-24</span>
+        <div class="flex gap-2">
+          <button id="prevPageBtn" onclick="changePage(-1)" class="px-3 py-1.5 rounded border border-slate-200 hover:bg-slate-50 disabled:opacity-50">Zurück</button>
+          <button id="nextPageBtn" onclick="changePage(1)" class="px-3 py-1.5 rounded border border-slate-200 hover:bg-slate-50 disabled:opacity-50">Weiter</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="mt-auto bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 no-print">
+    <p>Baufinanzierungsrechner - Alle Angaben ohne Gewähr. Berechnungen basieren auf deutschen Standards für Annuitätendarlehen.</p>
+  </footer>
+
+  <script>
+    // State Variables
+    let currentRepaymentMode = 'percent'; // 'percent' or 'amount'
+    let currentTableViewMode = 'yearly'; // 'yearly' or 'monthly'
+    let currentPage = 1;
+    const rowsPerPage = 24;
+    let computedData = null;
+    let chartInstance = null;
+
+    // DOM References
+    const purchasePriceInput = document.getElementById('purchasePrice');
+    const federalStateSelect = document.getElementById('federalState');
+    const taxRateInput = document.getElementById('taxRate');
+    const notaryRateInput = document.getElementById('notaryRate');
+    const agentRateInput = document.getElementById('agentRate');
+    const equityInput = document.getElementById('equity');
+    const interestRateInput = document.getElementById('interestRate');
+    const fixedPeriodInput = document.getElementById('fixedPeriod');
+    const initialRepaymentInput = document.getElementById('initialRepayment');
+    const targetMonthlyRateInput = document.getElementById('targetMonthlyRate');
+    const annualExtraInput = document.getElementById('annualExtra');
+
+    window.onload = function() {
+      lucide.createIcons();
+      attachEventListeners();
+      calculateLoan();
+    };
+
+    function attachEventListeners() {
+      const inputs = [
+        purchasePriceInput, taxRateInput, notaryRateInput, agentRateInput,
+        equityInput, interestRateInput, initialRepaymentInput, 
+        targetMonthlyRateInput, annualExtraInput
+      ];
+      inputs.forEach(input => {
+        input.addEventListener('input', () => calculateLoan());
+      });
+    }
+
+    function onStateChange() {
+      const selectedTax = federalStateSelect.value;
+      taxRateInput.value = selectedTax;
+      calculateLoan();
+    }
+
+    function setFixedPeriod(years) {
+      fixedPeriodInput.value = years;
+      calculateLoan();
+    }
+
+    function setRepaymentMode(mode) {
+      currentRepaymentMode = mode;
+      const percentContainer = document.getElementById('repaymentPercentContainer');
+      const amountContainer = document.getElementById('repaymentAmountContainer');
+      const percentBtn = document.getElementById('modePercentBtn');
+      const amountBtn = document.getElementById('modeAmountBtn');
+
+      if (mode === 'percent') {
+        percentContainer.classList.remove('hidden');
+        amountContainer.classList.add('hidden');
+        percentBtn.classList.add('bg-white', 'shadow-sm', 'text-slate-800');
+        percentBtn.classList.remove('text-slate-500');
+        amountBtn.classList.remove('bg-white', 'shadow-sm', 'text-slate-800');
+        amountBtn.classList.add('text-slate-500');
+      } else {
+        percentContainer.classList.add('hidden');
+        amountContainer.classList.remove('hidden');
+        amountBtn.classList.add('bg-white', 'shadow-sm', 'text-slate-800');
+        amountBtn.classList.remove('text-slate-500');
+        percentBtn.classList.remove('bg-white', 'shadow-sm', 'text-slate-800');
+        percentBtn.classList.add('text-slate-500');
+      }
+      calculateLoan();
+    }
+
+    function setTableViewMode(mode) {
+      currentTableViewMode = mode;
+      currentPage = 1;
+      const yearlyBtn = document.getElementById('viewYearlyBtn');
+      const monthlyBtn = document.getElementById('viewMonthlyBtn');
+
+      if (mode === 'yearly') {
+        yearlyBtn.classList.add('bg-white', 'shadow-sm', 'text-slate-800');
+        yearlyBtn.classList.remove('text-slate-500');
+        monthlyBtn.classList.remove('bg-white', 'shadow-sm', 'text-slate-800');
+        monthlyBtn.classList.add('text-slate-500');
+        document.getElementById('tablePagination').classList.add('hidden');
+      } else {
+        monthlyBtn.classList.add('bg-white', 'shadow-sm', 'text-slate-800');
+        monthlyBtn.classList.remove('text-slate-500');
+        yearlyBtn.classList.remove('bg-white', 'shadow-sm', 'text-slate-800');
+        yearlyBtn.classList.add('text-slate-500');
+        document.getElementById('tablePagination').classList.remove('hidden');
+      }
+      renderTable();
+    }
+
+    function resetDefaults() {
+      purchasePriceInput.value = 400000;
+      federalStateSelect.value = "6.5";
+      taxRateInput.value = 6.5;
+      notaryRateInput.value = 1.5;
+      agentRateInput.value = 3.57;
+      equityInput.value = 80000;
+      interestRateInput.value = 3.6;
+      initialRepaymentInput.value = 2.0;
+      targetMonthlyRateInput.value = 1685;
+      annualExtraInput.value = 0;
+      document.getElementById('fixedPeriodSelect').value = "15";
+      setFixedPeriod(15);
+      setRepaymentMode('percent');
+    }
+
+    function calculateLoan() {
+      const purchasePrice = parseFloat(purchasePriceInput.value) || 0;
+      const taxRate = parseFloat(taxRateInput.value) || 0;
+      const notaryRate = parseFloat(notaryRateInput.value) || 0;
+      const agentRate = parseFloat(agentRateInput.value) || 0;
+
+      // Kaufnebenkosten Calculations
+      const taxAmount = purchasePrice * (taxRate / 100);
+      const notaryAmount = purchasePrice * (notaryRate / 100);
+      const agentAmount = purchasePrice * (agentRate / 100);
+      const totalAncillary = taxAmount + notaryAmount + agentAmount;
+      const totalAncillaryPercent = taxRate + notaryRate + agentRate;
+      const totalCost = purchasePrice + totalAncillary;
+
+      const equity = parseFloat(equityInput.value) || 0;
+      const netLoanAmount = Math.max(0, totalCost - equity);
+
+      const interestRateAnnual = (parseFloat(interestRateInput.value) || 0) / 100;
+      const fixedPeriodYears = parseInt(fixedPeriodInput.value) || 15;
+      const annualExtraPayment = parseFloat(annualExtraInput.value) || 0;
+
+      // Display Ancillary Summary
+      document.getElementById('purchasePriceVal').innerText = formatCurrency(purchasePrice);
+      document.getElementById('totalAncillaryDisplay').innerText = `+${formatCurrency(totalAncillary)} (${totalAncillaryPercent.toFixed(2)}%)`;
+      document.getElementById('totalCostDisplay').innerText = formatCurrency(totalCost);
+      document.getElementById('equityPercent').innerText = `(${((equity / (totalCost || 1)) * 100).toFixed(1)}% der Gesamtkosten)`;
+      document.getElementById('loanAmountDisplay').innerText = formatCurrency(netLoanAmount);
+
+      // Equity Warning Guardrail
+      const equityWarning = document.getElementById('equityWarning');
+      if (equity < totalAncillary) {
+        equityWarning.classList.remove('hidden');
+        document.getElementById('equityWarningText').innerText = 
+          `Das Eigenkapital (${formatCurrency(equity)}) deckt die Kaufnebenkosten (${formatCurrency(totalAncillary)}) nicht vollständig ab. Es liegt eine Voll- bzw. Überfinanzierung vor.`;
+      } else {
+        equityWarning.classList.add('hidden');
+      }
+
+      if (netLoanAmount <= 0) {
+        updateUIZero();
+        return;
+      }
+
+      // Monthly payment rate calculation
+      let monthlyPayment = 0;
+      if (currentRepaymentMode === 'percent') {
+        const initialRepaymentRate = (parseFloat(initialRepaymentInput.value) || 0) / 100;
+        monthlyPayment = (netLoanAmount * (interestRateAnnual + initialRepaymentRate)) / 12;
+      } else {
+        monthlyPayment = parseFloat(targetMonthlyRateInput.value) || 0;
+      }
+
+      const monthlyInterestRate = interestRateAnnual / 12;
+
+      // Minimum rate check
+      const firstMonthInterest = netLoanAmount * monthlyInterestRate;
+      if (monthlyPayment <= firstMonthInterest) {
+        monthlyPayment = firstMonthInterest + 10;
+      }
+
+      const firstMonthPrincipal = monthlyPayment - firstMonthInterest;
+
+      // Amortization Loop Simulation
+      let balance = netLoanAmount;
+      let totalInterestPaid = 0;
+      let totalPrincipalPaid = 0;
+      let totalExtraPaid = 0;
+
+      let fixedPeriodBalance = netLoanAmount;
+      let fixedPeriodInterest = 0;
+      let fixedPeriodPrincipal = 0;
+
+      const monthlySchedule = [];
+      const yearlySchedule = [];
+
+      let currentYear = 1;
+      let yearStartBalance = balance;
+      let yearInterest = 0;
+      let yearPrincipal = 0;
+      let yearExtra = 0;
+
+      let totalMonths = 0;
+      const maxMonths = 12 * 60; // 60 years max limit
+
+      while (balance > 0.01 && totalMonths < maxMonths) {
+        totalMonths++;
+        const monthInYear = ((totalMonths - 1) % 12) + 1;
+
+        const interestForMonth = balance * monthlyInterestRate;
+        let principalForMonth = monthlyPayment - interestForMonth;
+
+        if (principalForMonth > balance) {
+          principalForMonth = balance;
+        }
+
+        balance -= principalForMonth;
+        yearInterest += interestForMonth;
+        yearPrincipal += principalForMonth;
+        totalInterestPaid += interestForMonth;
+        totalPrincipalPaid += principalForMonth;
+
+        // Apply Sondertilgung at month 12 of each year
+        let extraThisMonth = 0;
+        if (monthInYear === 12 && annualExtraPayment > 0 && balance > 0) {
+          extraThisMonth = Math.min(annualExtraPayment, balance);
+          balance -= extraThisMonth;
+          yearExtra += extraThisMonth;
+          totalExtraPaid += extraThisMonth;
+        }
+
+        monthlySchedule.push({
+          month: totalMonths,
+          year: Math.ceil(totalMonths / 12),
+          startBalance: balance + principalForMonth + extraThisMonth,
+          payment: interestForMonth + principalForMonth,
+          interest: interestForMonth,
+          principal: principalForMonth,
+          extra: extraThisMonth,
+          endBalance: balance
+        });
+
+        // Fixed period snapshot
+        if (totalMonths === fixedPeriodYears * 12) {
+          fixedPeriodBalance = balance;
+          fixedPeriodInterest = totalInterestPaid;
+          fixedPeriodPrincipal = totalPrincipalPaid + totalExtraPaid;
+        }
+
+        // Year end aggregator
+        if (monthInYear === 12 || balance <= 0.01) {
+          yearlySchedule.push({
+            year: currentYear,
+            startBalance: yearStartBalance,
+            payment: yearInterest + yearPrincipal,
+            interest: yearInterest,
+            principal: yearPrincipal,
+            extra: yearExtra,
+            endBalance: balance
+          });
+
+          currentYear++;
+          yearStartBalance = balance;
+          yearInterest = 0;
+          yearPrincipal = 0;
+          yearExtra = 0;
+        }
+      }
+
+      if (totalMonths < fixedPeriodYears * 12) {
+        fixedPeriodBalance = 0;
+        fixedPeriodInterest = totalInterestPaid;
+        fixedPeriodPrincipal = totalPrincipalPaid + totalExtraPaid;
+      }
+
+      computedData = {
+        purchasePrice,
+        totalAncillary,
+        totalCost,
+        equity,
+        netLoanAmount,
+        monthlyPayment,
+        firstMonthInterest,
+        firstMonthPrincipal,
+        fixedPeriodYears,
+        fixedPeriodBalance,
+        fixedPeriodInterest,
+        fixedPeriodPrincipal,
+        totalDurationYears: (totalMonths / 12).toFixed(1),
+        totalMonths,
+        monthlySchedule,
+        yearlySchedule
+      };
+
+      updateUIResults();
+      renderChart();
+      renderTable();
+    }
+
+    function updateUIResults() {
+      const data = computedData;
+      document.getElementById('resMonthlyRate').innerText = formatCurrency(data.monthlyPayment);
+      document.getElementById('resRateBreakdown').innerText = `1. Monat: ${formatCurrency(data.firstMonthInterest)} Zins / ${formatCurrency(data.firstMonthPrincipal)} Tilgung`;
+
+      document.getElementById('resRestschuld').innerText = formatCurrency(data.fixedPeriodBalance);
+      const restPercent = ((data.fixedPeriodBalance / data.netLoanAmount) * 100).toFixed(1);
+      document.getElementById('resRestschuldPercent').innerText = `${restPercent}% des Darlehens verbleibend`;
+
+      document.getElementById('resTotalInterestFixed').innerText = formatCurrency(data.fixedPeriodInterest);
+      document.getElementById('resTotalPrincipalFixed').innerText = formatCurrency(data.fixedPeriodPrincipal);
+
+      const paidPercent = ((data.fixedPeriodPrincipal / data.netLoanAmount) * 100).toFixed(1);
+      document.getElementById('resPaidPercent').innerText = `${paidPercent}% getilgt`;
+
+      document.getElementById('resTotalDuration').innerText = `${data.totalDurationYears} Jahre`;
+
+      const totalPaidInPeriod = data.fixedPeriodInterest + data.fixedPeriodPrincipal;
+      document.getElementById('resTotalPaidFixed').innerText = formatCurrency(totalPaidInPeriod);
+
+      // Print Summary Text
+      document.getElementById('printSummaryText').innerText = 
+        `Kaufpreis: ${formatCurrency(data.purchasePrice)} | Kaufnebenkosten: ${formatCurrency(data.totalAncillary)} | Gesamtkosten: ${formatCurrency(data.totalCost)} | Eigenkapital: ${formatCurrency(data.equity)}\n` +
+        `Nettodarlehen: ${formatCurrency(data.netLoanAmount)} | Sollzins: ${interestRateInput.value}% p.a. | Zinsbindung: ${data.fixedPeriodYears} Jahre | Monatliche Rate: ${formatCurrency(data.monthlyPayment)}\n` +
+        `Restschuld nach ${data.fixedPeriodYears} Jahren: ${formatCurrency(data.fixedPeriodBalance)} | Zinskosten (Zinsbindung): ${formatCurrency(data.fixedPeriodInterest)} | Gesamtlaufzeit: ${data.totalDurationYears} Jahre`;
+    }
+
+    function updateUIZero() {
+      document.getElementById('resMonthlyRate').innerText = '0 €';
+      document.getElementById('resRateBreakdown').innerText = 'Zins & Tilgung';
+      document.getElementById('resRestschuld').innerText = '0 €';
+      document.getElementById('resTotalInterestFixed').innerText = '0 €';
+      document.getElementById('resTotalPrincipalFixed').innerText = '0 €';
+      document.getElementById('resTotalDuration').innerText = '0 Jahre';
+      document.getElementById('resTotalPaidFixed').innerText = '0 €';
+      document.getElementById('tilgungTableBody').innerHTML = '<tr><td colspan="7" class="text-center py-6 text-slate-400">Keine Kreditfinanzierung erforderlich oder ungültige Werte.</td></tr>';
+      if (chartInstance) chartInstance.destroy();
+    }
+
+    function renderChart() {
+      const ctx = document.getElementById('loanChart').getContext('2d');
+      const yearly = computedData.yearlySchedule;
+
+      const labels = yearly.map(y => `Jahr ${y.year}`);
+      const restschuldData = yearly.map(y => y.endBalance);
+
+      let accumInterest = 0;
+      let accumPrincipal = 0;
+      const interestData = [];
+      const principalData = [];
+
+      yearly.forEach(y => {
+        accumInterest += y.interest;
+        accumPrincipal += y.principal + y.extra;
+        interestData.push(accumInterest);
+        principalData.push(accumPrincipal);
+      });
+
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Restschuld (€)',
+              data: restschuldData,
+              borderColor: '#0f172a',
+              backgroundColor: 'rgba(15, 23, 42, 0.05)',
+              fill: true,
+              tension: 0.2,
+              borderWidth: 2.5
+            },
+            {
+              label: 'Getilgt (€)',
+              data: principalData,
+              borderColor: '#10b981',
+              backgroundColor: 'transparent',
+              borderDash: [5, 5],
+              tension: 0.2,
+              borderWidth: 2
+            },
+            {
+              label: 'Gesamtzinsen (€)',
+              data: interestData,
+              borderColor: '#f43f5e',
+              backgroundColor: 'transparent',
+              tension: 0.2,
+              borderWidth: 2
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `${context.dataset.label}: ${formatCurrency(context.raw)}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: { grid: { display: false } },
+            y: {
+              ticks: {
+                callback: function(value) {
+                  return (value / 1000) + 'k €';
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('tilgungTableBody');
+      tbody.innerHTML = '';
+
+      const data = computedData;
+      if (!data) return;
+
+      let itemsToRender = [];
+
+      if (currentTableViewMode === 'yearly') {
+        itemsToRender = data.yearlySchedule;
+      } else {
+        const startIdx = (currentPage - 1) * rowsPerPage;
+        const endIdx = startIdx + rowsPerPage;
+        itemsToRender = data.monthlySchedule.slice(startIdx, endIdx);
+
+        const maxPages = Math.ceil(data.monthlySchedule.length / rowsPerPage);
+        document.getElementById('pageInfo').innerText = `Monate ${startIdx + 1} - ${Math.min(endIdx, data.monthlySchedule.length)} von ${data.monthlySchedule.length}`;
+        document.getElementById('prevPageBtn').disabled = currentPage === 1;
+        document.getElementById('nextPageBtn').disabled = currentPage >= maxPages;
+      }
+
+      itemsToRender.forEach(row => {
+        const tr = document.createElement('tr');
+        const isFixedPeriodEnd = currentTableViewMode === 'yearly' && row.year === data.fixedPeriodYears;
+
+        if (isFixedPeriodEnd) {
+          tr.className = 'bg-brand-50 font-semibold border-y-2 border-brand-200';
+        } else {
+          tr.className = 'hover:bg-slate-50 transition';
+        }
+
+        const labelText = currentTableViewMode === 'yearly' 
+          ? `Jahr ${row.year} ${isFixedPeriodEnd ? '★ Ende Zinsbindung' : ''}` 
+          : `Monat ${row.month} (Jahr ${row.year})`;
+
+        tr.innerHTML = `
+          <td class="px-6 py-3 font-medium text-slate-900">${labelText}</td>
+          <td class="px-6 py-3 text-right">${formatCurrency(row.startBalance)}</td>
+          <td class="px-6 py-3 text-right">${formatCurrency(row.payment + (row.extra || 0))}</td>
+          <td class="px-6 py-3 text-right text-rose-600">-${formatCurrency(row.interest)}</td>
+          <td class="px-6 py-3 text-right text-emerald-600">+${formatCurrency(row.principal)}</td>
+          <td class="px-6 py-3 text-right text-brand-600">${row.extra > 0 ? '+' + formatCurrency(row.extra) : '-'}</td>
+          <td class="px-6 py-3 text-right font-bold text-slate-900">${formatCurrency(row.endBalance)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function changePage(delta) {
+      currentPage += delta;
+      renderTable();
+    }
+
+    function formatCurrency(val) {
+      return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(val || 0);
+    }
+
+    function exportCSV() {
+      if (!computedData) return;
+      const isYearly = currentTableViewMode === 'yearly';
+      const schedule = isYearly ? computedData.yearlySchedule : computedData.monthlySchedule;
+
+      let csvContent = "data:text/csv;charset=utf-8,";
+      csvContent += isYearly 
+        ? "Jahr;Anfangssaldo;Rate;Zinsen;Tilgung;Sondertilgung;Restschuld\n" 
+        : "Monat;Jahr;Anfangssaldo;Rate;Zinsen;Tilgung;Sondertilgung;Restschuld\n";
+
+      schedule.forEach(row => {
+        if (isYearly) {
+          csvContent += `${row.year};${row.startBalance.toFixed(2)};${row.payment.toFixed(2)};${row.interest.toFixed(2)};${row.principal.toFixed(2)};${row.extra.toFixed(2)};${row.endBalance.toFixed(2)}\n`;
+        } else {
+          csvContent += `${row.month};${row.year};${row.startBalance.toFixed(2)};${row.payment.toFixed(2)};${row.interest.toFixed(2)};${row.principal.toFixed(2)};${row.extra.toFixed(2)};${row.endBalance.toFixed(2)}\n`;
+        }
+      });
+
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `Tilgungsplan_Baufinanzierung_${isYearly ? 'Jaehrlich' : 'Monatlich'}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
