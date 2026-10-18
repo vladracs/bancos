@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Baufinanzierungsrechner - mit Kaufnebenkosten & Tilgungsplan</title>
-  
+
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Chart.js CDN -->
@@ -21,6 +21,9 @@
             brand: {
               50: '#f0f7ff',
               100: '#e0effe',
+              200: '#bae0fd',
+              300: '#7cc8fb',
+              400: '#38aaf2',
               500: '#0284c7',
               600: '#0369a1',
               700: '#075985',
@@ -68,7 +71,7 @@
             Baufinanzierungsrechner
             <span class="text-xs bg-brand-500/20 text-brand-300 font-medium px-2.5 py-0.5 rounded-full border border-brand-500/30">Inkl. Nebenkosten</span>
           </h1>
-          <p class="text-xs text-slate-400">Immobilienkredit, Grunderwerbsteuer, Zinsen & Tilgungsplan</p>
+          <p class="text-xs text-slate-400">Immobilienkredit, Grunderwerbsteuer, Zinsen, Sondertilgung & Tilgungsplan</p>
         </div>
       </div>
       <div class="flex items-center gap-3">
@@ -86,7 +89,7 @@
 
     <!-- Top Inputs & Summary Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-      
+
       <!-- Input Controls Section -->
       <section class="lg:col-span-5 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-6 no-print">
         <div class="border-b border-slate-100 pb-4 flex justify-between items-center">
@@ -105,11 +108,11 @@
           <div>
             <div class="flex justify-between items-center mb-1.5">
               <label for="purchasePrice" class="text-sm font-medium text-slate-700">Kaufpreis der Immobilie (€)</label>
-              <span id="purchasePriceVal" class="text-xs font-semibold text-brand-700 bg-brand-50 px-2 py-0.5 rounded">400.000 €</span>
+              <span id="purchasePriceVal" class="text-xs font-semibold text-brand-700 bg-brand-50 px-2 py-0.5 rounded">1.100.000 €</span>
             </div>
             <div class="relative rounded-md shadow-sm">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">€</div>
-              <input type="number" id="purchasePrice" value="400000" step="5000" min="10000" max="5000000" 
+              <input type="number" id="purchasePrice" value="1100000" step="5000" min="10000" max="5000000"
                 class="block w-full pl-8 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-brand-500 focus:border-brand-500 text-sm font-medium">
             </div>
           </div>
@@ -120,14 +123,14 @@
               <span class="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
                 <i data-lucide="receipt" class="w-4 h-4 text-brand-600"></i> Kaufnebenkosten
               </span>
-              <span id="totalAncillaryDisplay" class="text-xs font-bold text-slate-900">+41.080 € (10,27%)</span>
+              <span id="totalAncillaryDisplay" class="text-xs font-bold text-slate-900">+58.300 € (5,30%)</span>
             </div>
 
             <!-- State Selector for Grunderwerbsteuer -->
             <div>
               <label for="federalState" class="text-xs font-medium text-slate-600 block mb-1">Bundesland (Grunderwerbsteuer)</label>
               <select id="federalState" onchange="onStateChange()" class="block w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-xs bg-white focus:ring-brand-500 focus:border-brand-500">
-                <option value="3.5" data-state="Bayern">Bayern (3,5%)</option>
+                <option value="3.5" data-state="Bayern" selected>Bayern (3,5%)</option>
                 <option value="5.0" data-state="Baden-Württemberg">Baden-Württemberg (5,0%)</option>
                 <option value="6.0" data-state="Berlin">Berlin (6,0%)</option>
                 <option value="6.5" data-state="Brandenburg">Brandenburg (6,5%)</option>
@@ -135,9 +138,8 @@
                 <option value="5.5" data-state="Hamburg">Hamburg (5,5%)</option>
                 <option value="6.0" data-state="Hessen">Hessen (6,0%)</option>
                 <option value="6.0" data-state="Mecklenburg-Vorpommern">Mecklenburg-Vorpommern (6,0%)</option>
-
                 <option value="5.0" data-state="Niedersachsen">Niedersachsen (5,0%)</option>
-                <option value="6.5" data-state="Nordrhein-Westfalen" selected>Nordrhein-Westfalen (6,5%)</option>
+                <option value="6.5" data-state="Nordrhein-Westfalen">Nordrhein-Westfalen (6,5%)</option>
                 <option value="6.5" data-state="Rheinland-Pfalz">Rheinland-Pfalz (6,5%)</option>
                 <option value="6.5" data-state="Saarland">Saarland (6,5%)</option>
                 <option value="5.5" data-state="Sachsen">Sachsen (5,5%)</option>
@@ -150,17 +152,17 @@
             <div class="grid grid-cols-3 gap-2 text-xs">
               <div>
                 <label for="taxRate" class="text-[11px] font-medium text-slate-500 block mb-1">Steuer (%)</label>
-                <input type="number" id="taxRate" value="6.5" step="0.1" min="0" max="10" 
+                <input type="number" id="taxRate" value="3.5" step="0.1" min="0" max="10"
                   class="w-full px-2 py-1.5 border border-slate-300 rounded-md text-xs bg-white text-center">
               </div>
               <div>
                 <label for="notaryRate" class="text-[11px] font-medium text-slate-500 block mb-1">Notar/Grundb. (%)</label>
-                <input type="number" id="notaryRate" value="1.5" step="0.1" min="0" max="5" 
+                <input type="number" id="notaryRate" value="1.8" step="0.1" min="0" max="5"
                   class="w-full px-2 py-1.5 border border-slate-300 rounded-md text-xs bg-white text-center">
               </div>
               <div>
                 <label for="agentRate" class="text-[11px] font-medium text-slate-500 block mb-1">Makler (%)</label>
-                <input type="number" id="agentRate" value="3.57" step="0.01" min="0" max="10" 
+                <input type="number" id="agentRate" value="0" step="0.01" min="0" max="10"
                   class="w-full px-2 py-1.5 border border-slate-300 rounded-md text-xs bg-white text-center">
               </div>
             </div>
@@ -170,7 +172,7 @@
           <div class="p-3 bg-slate-900 text-white rounded-xl flex justify-between items-center text-xs">
             <div>
               <span class="text-slate-400 block text-[11px]">Gesamtkosten (Kaufpreis + Nebenkosten)</span>
-              <span id="totalCostDisplay" class="text-sm font-bold text-white">441.080 €</span>
+              <span id="totalCostDisplay" class="text-sm font-bold text-white">1.158.300 €</span>
             </div>
             <i data-lucide="coins" class="w-5 h-5 text-brand-400"></i>
           </div>
@@ -179,11 +181,11 @@
           <div>
             <div class="flex justify-between items-center mb-1.5">
               <label for="equity" class="text-sm font-medium text-slate-700">Eigenkapital (€)</label>
-              <span id="equityPercent" class="text-xs text-slate-500">(18.1% der Gesamtkosten)</span>
+              <span id="equityPercent" class="text-xs text-slate-500">(63,3% der Gesamtkosten)</span>
             </div>
             <div class="relative rounded-md shadow-sm">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">€</div>
-              <input type="number" id="equity" value="80000" step="2500" min="0" max="5000000" 
+              <input type="number" id="equity" value="733300" step="2500" min="0" max="5000000"
                 class="block w-full pl-8 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-brand-500 focus:border-brand-500 text-sm font-medium">
             </div>
             <!-- Dynamic Alert for Equity Adequacy -->
@@ -197,9 +199,16 @@
           <div class="p-3 bg-brand-50 rounded-xl border border-brand-200 flex justify-between items-center">
             <div>
               <span class="text-xs font-semibold text-brand-800 block">Nettodarlehensbetrag (Finanzierung)</span>
-              <span id="loanAmountDisplay" class="text-lg font-bold text-brand-700">361.080 €</span>
+              <span id="loanAmountDisplay" class="text-lg font-bold text-brand-700">425.000 €</span>
             </div>
             <i data-lucide="calculator" class="w-5 h-5 text-brand-600"></i>
+          </div>
+
+          <!-- Auszahlung -->
+          <div>
+            <label for="payoutMonth" class="text-sm font-medium text-slate-700 block mb-1.5">Auszahlung / Tilgungsbeginn</label>
+            <input type="month" id="payoutMonth" value="2027-01"
+              class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-brand-500 focus:border-brand-500 text-sm">
           </div>
 
           <!-- Sollzinssatz p.a. & Zinsbindung -->
@@ -207,7 +216,7 @@
             <div>
               <label for="interestRate" class="text-sm font-medium text-slate-700 block mb-1.5">Sollzins p.a. (%)</label>
               <div class="relative rounded-md shadow-sm">
-                <input type="number" id="interestRate" value="3.6" step="0.05" min="0.1" max="15" 
+                <input type="number" id="interestRate" value="4.14" step="0.01" min="0.1" max="15"
                   class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-brand-500 focus:border-brand-500 text-sm">
                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">%</div>
               </div>
@@ -216,14 +225,17 @@
             <div>
               <label for="fixedPeriodSelect" class="text-sm font-medium text-slate-700 block mb-1.5">Zinsbindung</label>
               <select id="fixedPeriodSelect" onchange="setFixedPeriod(parseInt(this.value))" class="block w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:ring-brand-500 focus:border-brand-500">
-                <option value="5">5 Jahre</option>
+                <option value="1">1 Jahr</option>
+                <option value="2">2 Jahre</option>
+                <option value="3">3 Jahre</option>
+                <option value="5" selected>5 Jahre</option>
                 <option value="10">10 Jahre</option>
-                <option value="15" selected>15 Jahre</option>
+                <option value="15">15 Jahre</option>
                 <option value="20">20 Jahre</option>
                 <option value="25">25 Jahre</option>
                 <option value="30">30 Jahre</option>
               </select>
-              <input type="hidden" id="fixedPeriod" value="15">
+              <input type="hidden" id="fixedPeriod" value="5">
             </div>
           </div>
 
@@ -232,23 +244,23 @@
             <div class="flex items-center justify-between mb-2">
               <label class="text-sm font-medium text-slate-700">Tilgungsvorgabe</label>
               <div class="inline-flex rounded-lg p-0.5 bg-slate-100 border border-slate-200 text-xs">
-                <button type="button" id="modePercentBtn" onclick="setRepaymentMode('percent')" class="px-2.5 py-1 rounded-md font-medium transition bg-white shadow-sm text-slate-800">Tilgung %</button>
-                <button type="button" id="modeAmountBtn" onclick="setRepaymentMode('amount')" class="px-2.5 py-1 rounded-md font-medium transition text-slate-500 hover:text-slate-800">Rate (€)</button>
+                <button type="button" id="modePercentBtn" onclick="setRepaymentMode('percent')" class="px-2.5 py-1 rounded-md font-medium transition text-slate-500 hover:text-slate-800">Tilgung %</button>
+                <button type="button" id="modeAmountBtn" onclick="setRepaymentMode('amount')" class="px-2.5 py-1 rounded-md font-medium transition bg-white shadow-sm text-slate-800">Rate (€)</button>
               </div>
             </div>
 
-            <div id="repaymentPercentContainer">
+            <div id="repaymentPercentContainer" class="hidden">
               <div class="relative rounded-md shadow-sm">
-                <input type="number" id="initialRepayment" value="2.0" step="0.1" min="0.5" max="15" 
+                <input type="number" id="initialRepayment" value="1.0" step="0.1" min="0.5" max="15"
                   class="block w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-brand-500 focus:border-brand-500 text-sm">
                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">% p.a.</div>
               </div>
             </div>
 
-            <div id="repaymentAmountContainer" class="hidden">
+            <div id="repaymentAmountContainer">
               <div class="relative rounded-md shadow-sm">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">€</div>
-                <input type="number" id="targetMonthlyRate" value="1685" step="50" min="100" max="20000" 
+                <input type="number" id="targetMonthlyRate" value="1995" step="50" min="100" max="20000"
                   class="block w-full pl-8 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-brand-500 focus:border-brand-500 text-sm">
                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">/ Monat</div>
               </div>
@@ -256,19 +268,62 @@
           </div>
 
           <!-- Sondertilgung -->
-          <div class="border-t border-slate-100 pt-4">
-            <div class="flex justify-between items-center mb-1.5">
+          <div class="border-t border-slate-100 pt-4 space-y-3">
+            <div class="flex justify-between items-center">
               <label for="annualExtra" class="text-sm font-medium text-slate-700 flex items-center gap-1.5">
                 <span>Jährliche Sondertilgung</span>
               </label>
-              <span class="text-xs text-slate-400">Max. 5% p.a. üblich</span>
+              <span class="text-xs text-slate-400">erst 12 Monate nach Auszahlung</span>
             </div>
             <div class="relative rounded-md shadow-sm">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">€</div>
-              <input type="number" id="annualExtra" value="0" step="500" min="0" max="100000" 
+              <input type="number" id="annualExtra" value="40000" step="500" min="0" max="1000000"
                 class="block w-full pl-8 pr-3 py-2 border border-slate-300 rounded-lg focus:ring-brand-500 focus:border-brand-500 text-sm">
               <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">/ Jahr</div>
             </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label for="extraMonth" class="text-[11px] font-medium text-slate-500 block mb-1">Monat der Sondertilgung</label>
+                <select id="extraMonth" class="block w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-xs bg-white focus:ring-brand-500 focus:border-brand-500">
+                  <option value="1">Januar</option>
+                  <option value="2">Februar</option>
+                  <option value="3">März</option>
+                  <option value="4">April</option>
+                  <option value="5">Mai</option>
+                  <option value="6" selected>Juni</option>
+                  <option value="7">Juli</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">Oktober</option>
+                  <option value="11">November</option>
+                  <option value="12">Dezember</option>
+                </select>
+              </div>
+              <div>
+                <label for="extraCapPct" class="text-[11px] font-medium text-slate-500 block mb-1">Limit der Bank (% vom Darlehen)</label>
+                <input type="number" id="extraCapPct" value="10" step="1" min="0" max="100"
+                  class="w-full px-2.5 py-1.5 border border-slate-300 rounded-lg text-xs bg-white">
+              </div>
+            </div>
+
+            <p id="extraInfo" class="text-xs text-slate-500"></p>
+
+            <div id="extraWarning" class="hidden p-2 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-2 text-xs text-amber-800">
+              <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
+              <span id="extraWarningText"></span>
+            </div>
+          </div>
+
+          <!-- Ablösung am Ende der Zinsbindung -->
+          <div class="border-t border-slate-100 pt-4">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="payoffAtFixedEnd" checked class="mt-0.5 h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500">
+              <span>
+                <span class="text-sm font-medium text-slate-700 block">Restschuld am Ende der Zinsbindung ablösen</span>
+                <span class="text-xs text-slate-500 block mt-0.5">z. B. aus Verkaufserlös oder Rücklagen. Das Ende der Zinsbindung ist ohne Vorfälligkeitsentschädigung möglich.</span>
+              </span>
+            </label>
           </div>
 
         </form>
@@ -312,7 +367,7 @@
           <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm relative overflow-hidden">
             <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-1">Gesamtlaufzeit</span>
             <div id="resTotalDuration" class="text-2xl font-bold text-slate-900">0 Jahre</div>
-            <span class="text-xs text-slate-500 mt-1 block">Bis zur vollkommenen Schuldenfreiheit</span>
+            <span id="resDurationNote" class="text-xs text-slate-500 mt-1 block">Bis zur vollkommenen Schuldenfreiheit</span>
           </div>
 
           <!-- Card 6: Total Paid (Fixed) -->
@@ -332,7 +387,7 @@
               Entwicklung über die Jahre
             </h3>
             <div class="text-xs text-slate-500 flex items-center gap-3">
-              <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-slate-800 inline-block"></span> Restschuld</span>
+              <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-slate-800 inline-block"></span> <span id="legendRestschuld">Restschuld</span></span>
               <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span> Getilgt</span>
               <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span> Zinsen</span>
             </div>
@@ -367,7 +422,7 @@
       <!-- Printable Summary (Print mode only) -->
       <div class="hidden print-only p-6 border-b border-slate-200">
         <h2 class="text-xl font-bold mb-2">Baufinanzierungsübersicht & Tilgungsplan</h2>
-        <p id="printSummaryText" class="text-sm text-slate-600 leading-relaxed"></p>
+        <p id="printSummaryText" class="text-sm text-slate-600 leading-relaxed whitespace-pre-line"></p>
       </div>
 
       <!-- Table -->
@@ -381,6 +436,7 @@
               <th scope="col" class="px-6 py-3.5 font-semibold text-right text-rose-600">Zinsanteil</th>
               <th scope="col" class="px-6 py-3.5 font-semibold text-right text-emerald-600">Tilgungsanteil</th>
               <th scope="col" class="px-6 py-3.5 font-semibold text-right text-brand-600">Sondertilgung</th>
+              <th scope="col" class="px-6 py-3.5 font-semibold text-right text-amber-600">Ablösung</th>
               <th scope="col" class="px-6 py-3.5 font-semibold text-right">Restschuld</th>
             </tr>
           </thead>
@@ -403,12 +459,158 @@
   </main>
 
   <footer class="mt-auto bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500 no-print">
-    <p>Baufinanzierungsrechner - Alle Angaben ohne Gewähr. Berechnungen basieren auf deutschen Standards für Annuitätendarlehen.</p>
+    <p>Baufinanzierungsrechner - Alle Angaben ohne Gewähr. Berechnungen basieren auf deutschen Standards für Annuitätendarlehen (monatlich nachschüssig). Keine Finanzberatung.</p>
   </footer>
 
   <script>
+    const MONTH_NAMES = ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'];
+    const MONTH_NAMES_LONG = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+
+    // ==== CALC START (pure functions, no DOM access) ====
+
+    // Calendar month/year of loan month m (m = 1 is the payout month).
+    function calendarOf(startYear, startMonth, m) {
+      const idx = (startMonth - 1) + (m - 1);
+      return { year: startYear + Math.floor(idx / 12), month: (idx % 12) + 1 };
+    }
+
+    // First loan month in which a Sondertilgung is allowed: it must fall in the chosen
+    // calendar month AND come after the first 12 months (m > 12).
+    function firstExtraMonthIndex(startYear, startMonth, extraMonth) {
+      for (let m = 13; m <= 24; m++) {
+        if (calendarOf(startYear, startMonth, m).month === extraMonth) return m;
+      }
+      return 13;
+    }
+
+    function computeSchedule(p) {
+      // p: loan, annualRate (0.0414), monthlyPayment, fixedMonths, extraAmount, extraMonth (1-12),
+      //    extraCapPct, startYear, startMonth (1-12), payoffAtFixedEnd (bool), maxMonths
+      const r = p.annualRate / 12;
+      const extraCap = p.loan * (p.extraCapPct / 100);
+      const extraPlanned = Math.max(0, p.extraAmount);
+      const extraEffective = Math.min(extraPlanned, extraCap);
+
+      let balance = p.loan;
+      let totalInterest = 0;
+      let totalPrincipal = 0;
+      let totalExtra = 0;
+      let payoffAmount = 0;
+
+      let fixedBalance = p.loan;
+      let fixedInterest = 0;
+      let fixedPrincipal = 0;
+      let fixedSnapshotTaken = false;
+
+      const monthly = [];
+      const yearly = [];
+      const extraEvents = [];
+
+      let yearNo = 1;
+      let yearStartBalance = balance;
+      let yearInterest = 0, yearPrincipal = 0, yearExtra = 0, yearPayoff = 0;
+      let yearFirstCal = calendarOf(p.startYear, p.startMonth, 1);
+
+      let m = 0;
+      while (balance > 0.01 && m < p.maxMonths) {
+        m++;
+        const monthInYear = ((m - 1) % 12) + 1;
+        const cal = calendarOf(p.startYear, p.startMonth, m);
+        const startBal = balance;
+
+        const interest = balance * r;
+        let principal = p.monthlyPayment - interest;
+        if (principal > balance) principal = balance;
+        balance -= principal;
+
+        totalInterest += interest;
+        totalPrincipal += principal;
+        yearInterest += interest;
+        yearPrincipal += principal;
+
+        // Sondertilgung: only in the chosen month and never within the first 12 months
+        let extra = 0;
+        if (extraEffective > 0 && m > 12 && cal.month === p.extraMonth && balance > 0.01) {
+          extra = Math.min(extraEffective, balance);
+          balance -= extra;
+          totalExtra += extra;
+          yearExtra += extra;
+          extraEvents.push({ month: m, calYear: cal.year, calMonth: cal.month, amount: extra });
+        }
+
+        const balanceBeforePayoff = balance;
+
+        // End of fixed period: snapshot, then optional full payoff of the remaining balance
+        let payoff = 0;
+        if (m === p.fixedMonths) {
+          fixedBalance = balance;
+          fixedInterest = totalInterest;
+          fixedPrincipal = totalPrincipal + totalExtra;
+          fixedSnapshotTaken = true;
+          if (p.payoffAtFixedEnd && balance > 0.01) {
+            payoff = balance;
+            balance = 0;
+            payoffAmount = payoff;
+            yearPayoff += payoff;
+          }
+        }
+
+        monthly.push({
+          month: m,
+          year: Math.ceil(m / 12),
+          calYear: cal.year,
+          calMonth: cal.month,
+          startBalance: startBal,
+          payment: interest + principal,
+          interest: interest,
+          principal: principal,
+          extra: extra,
+          payoff: payoff,
+          endBalance: balance,
+          endBalancePrePayoff: balanceBeforePayoff
+        });
+
+        if (monthInYear === 12 || balance <= 0.01) {
+          yearly.push({
+            year: yearNo,
+            from: yearFirstCal,
+            to: cal,
+            startBalance: yearStartBalance,
+            payment: yearInterest + yearPrincipal,
+            interest: yearInterest,
+            principal: yearPrincipal,
+            extra: yearExtra,
+            payoff: yearPayoff,
+            endBalance: balance,
+            endBalancePrePayoff: balanceBeforePayoff
+          });
+          yearNo++;
+          yearStartBalance = balance;
+          yearInterest = 0; yearPrincipal = 0; yearExtra = 0; yearPayoff = 0;
+          yearFirstCal = calendarOf(p.startYear, p.startMonth, m + 1);
+        }
+      }
+
+      // Loan fully repaid before the end of the fixed period
+      if (!fixedSnapshotTaken) {
+        fixedBalance = 0;
+        fixedInterest = totalInterest;
+        fixedPrincipal = totalPrincipal + totalExtra;
+      }
+
+      return {
+        monthly, yearly, extraEvents,
+        extraCap, extraPlanned, extraEffective,
+        totalMonths: m,
+        totalInterest, totalExtra, payoffAmount,
+        fixedBalance, fixedInterest, fixedPrincipal
+      };
+    }
+
+    // ==== CALC END ====
+
     // State Variables
-    let currentRepaymentMode = 'percent'; // 'percent' or 'amount'
+    let currentRepaymentMode = 'amount'; // 'percent' or 'amount'
     let currentTableViewMode = 'yearly'; // 'yearly' or 'monthly'
     let currentPage = 1;
     const rowsPerPage = 24;
@@ -422,23 +624,28 @@
     const notaryRateInput = document.getElementById('notaryRate');
     const agentRateInput = document.getElementById('agentRate');
     const equityInput = document.getElementById('equity');
+    const payoutMonthInput = document.getElementById('payoutMonth');
     const interestRateInput = document.getElementById('interestRate');
     const fixedPeriodInput = document.getElementById('fixedPeriod');
     const initialRepaymentInput = document.getElementById('initialRepayment');
     const targetMonthlyRateInput = document.getElementById('targetMonthlyRate');
     const annualExtraInput = document.getElementById('annualExtra');
+    const extraMonthSelect = document.getElementById('extraMonth');
+    const extraCapPctInput = document.getElementById('extraCapPct');
+    const payoffCheckbox = document.getElementById('payoffAtFixedEnd');
 
     window.onload = function() {
       lucide.createIcons();
       attachEventListeners();
-      calculateLoan();
+      setRepaymentMode('amount'); // also runs calculateLoan()
     };
 
     function attachEventListeners() {
       const inputs = [
         purchasePriceInput, taxRateInput, notaryRateInput, agentRateInput,
-        equityInput, interestRateInput, initialRepaymentInput, 
-        targetMonthlyRateInput, annualExtraInput
+        equityInput, payoutMonthInput, interestRateInput, initialRepaymentInput,
+        targetMonthlyRateInput, annualExtraInput, extraMonthSelect, extraCapPctInput,
+        payoffCheckbox
       ];
       inputs.forEach(input => {
         input.addEventListener('input', () => calculateLoan());
@@ -504,19 +711,36 @@
     }
 
     function resetDefaults() {
-      purchasePriceInput.value = 400000;
-      federalStateSelect.value = "6.5";
-      taxRateInput.value = 6.5;
-      notaryRateInput.value = 1.5;
-      agentRateInput.value = 3.57;
-      equityInput.value = 80000;
-      interestRateInput.value = 3.6;
-      initialRepaymentInput.value = 2.0;
-      targetMonthlyRateInput.value = 1685;
-      annualExtraInput.value = 0;
-      document.getElementById('fixedPeriodSelect').value = "15";
-      setFixedPeriod(15);
-      setRepaymentMode('percent');
+      purchasePriceInput.value = 1100000;
+      federalStateSelect.value = "3.5";
+      taxRateInput.value = 3.5;
+      notaryRateInput.value = 1.8;
+      agentRateInput.value = 0;
+      equityInput.value = 733300;
+      payoutMonthInput.value = '2027-01';
+      interestRateInput.value = 4.14;
+      initialRepaymentInput.value = 1.0;
+      targetMonthlyRateInput.value = 1995;
+      annualExtraInput.value = 40000;
+      extraMonthSelect.value = "6";
+      extraCapPctInput.value = 10;
+      payoffCheckbox.checked = true;
+      document.getElementById('fixedPeriodSelect').value = "5";
+      fixedPeriodInput.value = 5;
+      setRepaymentMode('amount');
+    }
+
+    function parsePayoutMonth() {
+      const raw = payoutMonthInput.value || '2027-01';
+      const parts = raw.split('-');
+      const year = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10);
+      if (isNaN(year) || isNaN(month)) return { year: 2027, month: 1 };
+      return { year, month };
+    }
+
+    function monthLabel(cal) {
+      return `${MONTH_NAMES[cal.month - 1]} ${cal.year}`;
     }
 
     function calculateLoan() {
@@ -537,21 +761,25 @@
       const netLoanAmount = Math.max(0, totalCost - equity);
 
       const interestRateAnnual = (parseFloat(interestRateInput.value) || 0) / 100;
-      const fixedPeriodYears = parseInt(fixedPeriodInput.value) || 15;
+      const fixedPeriodYears = parseInt(fixedPeriodInput.value) || 5;
       const annualExtraPayment = parseFloat(annualExtraInput.value) || 0;
+      const extraMonth = parseInt(extraMonthSelect.value) || 6;
+      const capParsed = parseFloat(extraCapPctInput.value);
+      const extraCapPct = isNaN(capParsed) ? 10 : Math.max(0, capParsed);
+      const payoutCal = parsePayoutMonth();
 
       // Display Ancillary Summary
       document.getElementById('purchasePriceVal').innerText = formatCurrency(purchasePrice);
-      document.getElementById('totalAncillaryDisplay').innerText = `+${formatCurrency(totalAncillary)} (${totalAncillaryPercent.toFixed(2)}%)`;
+      document.getElementById('totalAncillaryDisplay').innerText = `+${formatCurrency(totalAncillary)} (${totalAncillaryPercent.toFixed(2).replace('.', ',')}%)`;
       document.getElementById('totalCostDisplay').innerText = formatCurrency(totalCost);
-      document.getElementById('equityPercent').innerText = `(${((equity / (totalCost || 1)) * 100).toFixed(1)}% der Gesamtkosten)`;
+      document.getElementById('equityPercent').innerText = `(${((equity / (totalCost || 1)) * 100).toFixed(1).replace('.', ',')}% der Gesamtkosten)`;
       document.getElementById('loanAmountDisplay').innerText = formatCurrency(netLoanAmount);
 
       // Equity Warning Guardrail
       const equityWarning = document.getElementById('equityWarning');
       if (equity < totalAncillary) {
         equityWarning.classList.remove('hidden');
-        document.getElementById('equityWarningText').innerText = 
+        document.getElementById('equityWarningText').innerText =
           `Das Eigenkapital (${formatCurrency(equity)}) deckt die Kaufnebenkosten (${formatCurrency(totalAncillary)}) nicht vollständig ab. Es liegt eine Voll- bzw. Überfinanzierung vor.`;
       } else {
         equityWarning.classList.add('hidden');
@@ -578,100 +806,23 @@
       if (monthlyPayment <= firstMonthInterest) {
         monthlyPayment = firstMonthInterest + 10;
       }
-
       const firstMonthPrincipal = monthlyPayment - firstMonthInterest;
 
-      // Amortization Loop Simulation
-      let balance = netLoanAmount;
-      let totalInterestPaid = 0;
-      let totalPrincipalPaid = 0;
-      let totalExtraPaid = 0;
+      const payoffAtFixedEnd = payoffCheckbox.checked;
 
-      let fixedPeriodBalance = netLoanAmount;
-      let fixedPeriodInterest = 0;
-      let fixedPeriodPrincipal = 0;
-
-      const monthlySchedule = [];
-      const yearlySchedule = [];
-
-      let currentYear = 1;
-      let yearStartBalance = balance;
-      let yearInterest = 0;
-      let yearPrincipal = 0;
-      let yearExtra = 0;
-
-      let totalMonths = 0;
-      const maxMonths = 12 * 60; // 60 years max limit
-
-      while (balance > 0.01 && totalMonths < maxMonths) {
-        totalMonths++;
-        const monthInYear = ((totalMonths - 1) % 12) + 1;
-
-        const interestForMonth = balance * monthlyInterestRate;
-        let principalForMonth = monthlyPayment - interestForMonth;
-
-        if (principalForMonth > balance) {
-          principalForMonth = balance;
-        }
-
-        balance -= principalForMonth;
-        yearInterest += interestForMonth;
-        yearPrincipal += principalForMonth;
-        totalInterestPaid += interestForMonth;
-        totalPrincipalPaid += principalForMonth;
-
-        // Apply Sondertilgung at month 12 of each year
-        let extraThisMonth = 0;
-        if (monthInYear === 12 && annualExtraPayment > 0 && balance > 0) {
-          extraThisMonth = Math.min(annualExtraPayment, balance);
-          balance -= extraThisMonth;
-          yearExtra += extraThisMonth;
-          totalExtraPaid += extraThisMonth;
-        }
-
-        monthlySchedule.push({
-          month: totalMonths,
-          year: Math.ceil(totalMonths / 12),
-          startBalance: balance + principalForMonth + extraThisMonth,
-          payment: interestForMonth + principalForMonth,
-          interest: interestForMonth,
-          principal: principalForMonth,
-          extra: extraThisMonth,
-          endBalance: balance
-        });
-
-        // Fixed period snapshot
-        if (totalMonths === fixedPeriodYears * 12) {
-          fixedPeriodBalance = balance;
-          fixedPeriodInterest = totalInterestPaid;
-          fixedPeriodPrincipal = totalPrincipalPaid + totalExtraPaid;
-        }
-
-        // Year end aggregator
-        if (monthInYear === 12 || balance <= 0.01) {
-          yearlySchedule.push({
-            year: currentYear,
-            startBalance: yearStartBalance,
-            payment: yearInterest + yearPrincipal,
-            interest: yearInterest,
-            principal: yearPrincipal,
-            extra: yearExtra,
-            endBalance: balance
-          });
-
-          currentYear++;
-          yearStartBalance = balance;
-          yearInterest = 0;
-          yearPrincipal = 0;
-          yearExtra = 0;
-        }
-      }
-
-      if (totalMonths < fixedPeriodYears * 12) {
-        fixedPeriodBalance = 0;
-        fixedPeriodInterest = totalInterestPaid;
-        fixedPeriodPrincipal = totalPrincipalPaid + totalExtraPaid;
-      }
+      const result = computeSchedule({
+        loan: netLoanAmount,
+        annualRate: interestRateAnnual,
+        monthlyPayment: monthlyPayment,
+        fixedMonths: fixedPeriodYears * 12,
+        extraAmount: annualExtraPayment,
+        extraMonth: extraMonth,
+        extraCapPct: extraCapPct,
+        startYear: payoutCal.year,
+        startMonth: payoutCal.month,
+        payoffAtFixedEnd: payoffAtFixedEnd,
+        maxMonths: 12 * 60
+      });
 
       computedData = {
         purchasePrice,
@@ -683,18 +834,54 @@
         firstMonthInterest,
         firstMonthPrincipal,
         fixedPeriodYears,
-        fixedPeriodBalance,
-        fixedPeriodInterest,
-        fixedPeriodPrincipal,
-        totalDurationYears: (totalMonths / 12).toFixed(1),
-        totalMonths,
-        monthlySchedule,
-        yearlySchedule
+        fixedPeriodBalance: result.fixedBalance,
+        fixedPeriodInterest: result.fixedInterest,
+        fixedPeriodPrincipal: result.fixedPrincipal,
+        payoffAtFixedEnd,
+        payoffAmount: result.payoffAmount,
+        totalExtra: result.totalExtra,
+        totalDurationYears: (result.totalMonths / 12).toFixed(1).replace('.', ','),
+        totalMonths: result.totalMonths,
+        extraPlanned: result.extraPlanned,
+        extraCap: result.extraCap,
+        extraEffective: result.extraEffective,
+        extraEvents: result.extraEvents,
+        extraMonth: extraMonth,
+        payoutCal: payoutCal,
+        monthlySchedule: result.monthly,
+        yearlySchedule: result.yearly
       };
 
+      updateExtraInfo();
       updateUIResults();
       renderChart();
       renderTable();
+    }
+
+    function updateExtraInfo() {
+      const d = computedData;
+      const infoEl = document.getElementById('extraInfo');
+      const warnEl = document.getElementById('extraWarning');
+      const warnText = document.getElementById('extraWarningText');
+
+      const firstIdx = firstExtraMonthIndex(d.payoutCal.year, d.payoutCal.month, d.extraMonth);
+      const firstCal = calendarOf(d.payoutCal.year, d.payoutCal.month, firstIdx);
+
+      if (d.extraPlanned > 0) {
+        infoEl.innerText =
+          `Erste Sondertilgung: ${MONTH_NAMES_LONG[firstCal.month - 1]} ${firstCal.year} (frühestens 12 Monate nach Auszahlung im ${monthLabel(d.payoutCal)}). ` +
+          `Limit: ${formatCurrency(d.extraCap)} pro Jahr.`;
+      } else {
+        infoEl.innerText = `Keine Sondertilgung geplant. Limit der Bank: ${formatCurrency(d.extraCap)} pro Jahr.`;
+      }
+
+      if (d.extraPlanned > d.extraCap) {
+        warnEl.classList.remove('hidden');
+        warnText.innerText =
+          `Die gewünschte Sondertilgung (${formatCurrency(d.extraPlanned)}) liegt über dem Limit (${formatCurrency(d.extraCap)} pro Jahr). Gerechnet wird mit ${formatCurrency(d.extraCap)}.`;
+      } else {
+        warnEl.classList.add('hidden');
+      }
     }
 
     function updateUIResults() {
@@ -703,25 +890,42 @@
       document.getElementById('resRateBreakdown').innerText = `1. Monat: ${formatCurrency(data.firstMonthInterest)} Zins / ${formatCurrency(data.firstMonthPrincipal)} Tilgung`;
 
       document.getElementById('resRestschuld').innerText = formatCurrency(data.fixedPeriodBalance);
-      const restPercent = ((data.fixedPeriodBalance / data.netLoanAmount) * 100).toFixed(1);
-      document.getElementById('resRestschuldPercent').innerText = `${restPercent}% des Darlehens verbleibend`;
+      const restPercent = ((data.fixedPeriodBalance / data.netLoanAmount) * 100).toFixed(1).replace('.', ',');
+      document.getElementById('resRestschuldPercent').innerText =
+        data.payoffAtFixedEnd && data.payoffAmount > 0
+          ? `${restPercent}% des Darlehens, wird abgelöst`
+          : `${restPercent}% des Darlehens verbleibend`;
 
       document.getElementById('resTotalInterestFixed').innerText = formatCurrency(data.fixedPeriodInterest);
       document.getElementById('resTotalPrincipalFixed').innerText = formatCurrency(data.fixedPeriodPrincipal);
 
-      const paidPercent = ((data.fixedPeriodPrincipal / data.netLoanAmount) * 100).toFixed(1);
+      const paidPercent = ((data.fixedPeriodPrincipal / data.netLoanAmount) * 100).toFixed(1).replace('.', ',');
       document.getElementById('resPaidPercent').innerText = `${paidPercent}% getilgt`;
 
       document.getElementById('resTotalDuration').innerText = `${data.totalDurationYears} Jahre`;
+      document.getElementById('resDurationNote').innerText =
+        data.payoffAtFixedEnd && data.payoffAmount > 0
+          ? 'Restschuld wird am Ende der Zinsbindung abgelöst'
+          : 'Bis zur vollkommenen Schuldenfreiheit';
+
+      document.getElementById('legendRestschuld').innerText =
+        data.payoffAtFixedEnd && data.payoffAmount > 0 ? 'Restschuld (vor Ablösung)' : 'Restschuld';
 
       const totalPaidInPeriod = data.fixedPeriodInterest + data.fixedPeriodPrincipal;
       document.getElementById('resTotalPaidFixed').innerText = formatCurrency(totalPaidInPeriod);
 
       // Print Summary Text
-      document.getElementById('printSummaryText').innerText = 
+      const extraLine = data.extraEffective > 0
+        ? `Sondertilgung: ${formatCurrency(data.extraEffective)} pro Jahr, jeweils im ${MONTH_NAMES_LONG[data.extraMonth - 1]}, erstmals nach 12 Monaten`
+        : 'Keine Sondertilgung';
+      const payoffLine = data.payoffAtFixedEnd && data.payoffAmount > 0
+        ? ` | Ablösung am Ende der Zinsbindung: ${formatCurrency(data.payoffAmount)}`
+        : '';
+      document.getElementById('printSummaryText').innerText =
         `Kaufpreis: ${formatCurrency(data.purchasePrice)} | Kaufnebenkosten: ${formatCurrency(data.totalAncillary)} | Gesamtkosten: ${formatCurrency(data.totalCost)} | Eigenkapital: ${formatCurrency(data.equity)}\n` +
-        `Nettodarlehen: ${formatCurrency(data.netLoanAmount)} | Sollzins: ${interestRateInput.value}% p.a. | Zinsbindung: ${data.fixedPeriodYears} Jahre | Monatliche Rate: ${formatCurrency(data.monthlyPayment)}\n` +
-        `Restschuld nach ${data.fixedPeriodYears} Jahren: ${formatCurrency(data.fixedPeriodBalance)} | Zinskosten (Zinsbindung): ${formatCurrency(data.fixedPeriodInterest)} | Gesamtlaufzeit: ${data.totalDurationYears} Jahre`;
+        `Nettodarlehen: ${formatCurrency(data.netLoanAmount)} | Sollzins: ${interestRateInput.value}% p.a. | Zinsbindung: ${data.fixedPeriodYears} Jahre | Monatliche Rate: ${formatCurrency(data.monthlyPayment)} | Auszahlung: ${monthLabel(data.payoutCal)}\n` +
+        `${extraLine}\n` +
+        `Restschuld nach ${data.fixedPeriodYears} Jahren: ${formatCurrency(data.fixedPeriodBalance)} | Zinskosten (Zinsbindung): ${formatCurrency(data.fixedPeriodInterest)} | Gesamtlaufzeit: ${data.totalDurationYears} Jahre${payoffLine}`;
     }
 
     function updateUIZero() {
@@ -732,8 +936,11 @@
       document.getElementById('resTotalPrincipalFixed').innerText = '0 €';
       document.getElementById('resTotalDuration').innerText = '0 Jahre';
       document.getElementById('resTotalPaidFixed').innerText = '0 €';
-      document.getElementById('tilgungTableBody').innerHTML = '<tr><td colspan="7" class="text-center py-6 text-slate-400">Keine Kreditfinanzierung erforderlich oder ungültige Werte.</td></tr>';
-      if (chartInstance) chartInstance.destroy();
+      document.getElementById('tilgungTableBody').innerHTML = '<tr><td colspan="8" class="text-center py-6 text-slate-400">Keine Kreditfinanzierung erforderlich oder ungültige Werte.</td></tr>';
+      document.getElementById('extraInfo').innerText = '';
+      document.getElementById('extraWarning').classList.add('hidden');
+      computedData = null;
+      if (chartInstance) { chartInstance.destroy(); chartInstance = null; }
     }
 
     function renderChart() {
@@ -741,7 +948,7 @@
       const yearly = computedData.yearlySchedule;
 
       const labels = yearly.map(y => `Jahr ${y.year}`);
-      const restschuldData = yearly.map(y => y.endBalance);
+      const restschuldData = yearly.map(y => y.endBalancePrePayoff);
 
       let accumInterest = 0;
       let accumPrincipal = 0;
@@ -809,6 +1016,7 @@
           scales: {
             x: { grid: { display: false } },
             y: {
+              beginAtZero: true,
               ticks: {
                 callback: function(value) {
                   return (value / 1000) + 'k €';
@@ -844,25 +1052,32 @@
 
       itemsToRender.forEach(row => {
         const tr = document.createElement('tr');
-        const isFixedPeriodEnd = currentTableViewMode === 'yearly' && row.year === data.fixedPeriodYears;
+        const isYearly = currentTableViewMode === 'yearly';
+        const isFixedPeriodEnd = isYearly
+          ? row.year === data.fixedPeriodYears
+          : row.month === data.fixedPeriodYears * 12;
+        const hasExtra = row.extra > 0;
 
         if (isFixedPeriodEnd) {
           tr.className = 'bg-brand-50 font-semibold border-y-2 border-brand-200';
+        } else if (hasExtra && !isYearly) {
+          tr.className = 'bg-emerald-50/60 hover:bg-emerald-50 transition';
         } else {
           tr.className = 'hover:bg-slate-50 transition';
         }
 
-        const labelText = currentTableViewMode === 'yearly' 
-          ? `Jahr ${row.year} ${isFixedPeriodEnd ? '★ Ende Zinsbindung' : ''}` 
-          : `Monat ${row.month} (Jahr ${row.year})`;
+        const labelText = isYearly
+          ? `Jahr ${row.year} (${monthLabel(row.from)} – ${monthLabel(row.to)}) ${isFixedPeriodEnd ? '★ Ende Zinsbindung' : ''}`
+          : `${monthLabel({ year: row.calYear, month: row.calMonth })} (Monat ${row.month}) ${isFixedPeriodEnd ? '★ Ende Zinsbindung' : ''}`;
 
         tr.innerHTML = `
-          <td class="px-6 py-3 font-medium text-slate-900">${labelText}</td>
+          <td class="px-6 py-3 font-medium text-slate-900 whitespace-nowrap">${labelText}</td>
           <td class="px-6 py-3 text-right">${formatCurrency(row.startBalance)}</td>
-          <td class="px-6 py-3 text-right">${formatCurrency(row.payment + (row.extra || 0))}</td>
+          <td class="px-6 py-3 text-right">${formatCurrency(row.payment + (row.extra || 0) + (row.payoff || 0))}</td>
           <td class="px-6 py-3 text-right text-rose-600">-${formatCurrency(row.interest)}</td>
           <td class="px-6 py-3 text-right text-emerald-600">+${formatCurrency(row.principal)}</td>
           <td class="px-6 py-3 text-right text-brand-600">${row.extra > 0 ? '+' + formatCurrency(row.extra) : '-'}</td>
+          <td class="px-6 py-3 text-right text-amber-600">${row.payoff > 0 ? '+' + formatCurrency(row.payoff) : '-'}</td>
           <td class="px-6 py-3 text-right font-bold text-slate-900">${formatCurrency(row.endBalance)}</td>
         `;
         tbody.appendChild(tr);
@@ -884,15 +1099,15 @@
       const schedule = isYearly ? computedData.yearlySchedule : computedData.monthlySchedule;
 
       let csvContent = "data:text/csv;charset=utf-8,";
-      csvContent += isYearly 
-        ? "Jahr;Anfangssaldo;Rate;Zinsen;Tilgung;Sondertilgung;Restschuld\n" 
-        : "Monat;Jahr;Anfangssaldo;Rate;Zinsen;Tilgung;Sondertilgung;Restschuld\n";
+      csvContent += isYearly
+        ? "Jahr;Von;Bis;Anfangssaldo;Rate;Zinsen;Tilgung;Sondertilgung;Abloesung;Restschuld\n"
+        : "Monat;Datum;Anfangssaldo;Rate;Zinsen;Tilgung;Sondertilgung;Abloesung;Restschuld\n";
 
       schedule.forEach(row => {
         if (isYearly) {
-          csvContent += `${row.year};${row.startBalance.toFixed(2)};${row.payment.toFixed(2)};${row.interest.toFixed(2)};${row.principal.toFixed(2)};${row.extra.toFixed(2)};${row.endBalance.toFixed(2)}\n`;
+          csvContent += `${row.year};${monthLabel(row.from)};${monthLabel(row.to)};${row.startBalance.toFixed(2)};${row.payment.toFixed(2)};${row.interest.toFixed(2)};${row.principal.toFixed(2)};${row.extra.toFixed(2)};${row.payoff.toFixed(2)};${row.endBalance.toFixed(2)}\n`;
         } else {
-          csvContent += `${row.month};${row.year};${row.startBalance.toFixed(2)};${row.payment.toFixed(2)};${row.interest.toFixed(2)};${row.principal.toFixed(2)};${row.extra.toFixed(2)};${row.endBalance.toFixed(2)}\n`;
+          csvContent += `${row.month};${monthLabel({ year: row.calYear, month: row.calMonth })};${row.startBalance.toFixed(2)};${row.payment.toFixed(2)};${row.interest.toFixed(2)};${row.principal.toFixed(2)};${row.extra.toFixed(2)};${row.payoff.toFixed(2)};${row.endBalance.toFixed(2)}\n`;
         }
       });
 
